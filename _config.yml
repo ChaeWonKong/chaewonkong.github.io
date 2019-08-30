@@ -18,7 +18,7 @@ plugins:
 # Setup
 title: Leon
 tagline: "Chaewon Kong's dev blog"
-description: "Chaewon Kong's Dev Blog on computer science, algorithm, javascript, typescript, python, react, react native, electron, node and express"
+description: "Chaewon Kong's Dev Blog on web development and computer science. Frequently writes on JavaScript, React, React Native and Node."
 url: http://lanyon.getpoole.com
 baseurl: ""
 paginate: 1
