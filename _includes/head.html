@@ -8,6 +8,20 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1"
   />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=UA-140765270-1"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "UA-140765270-1");
+  </script>
 
   <!-- <title> -->
   {% if page.collectionpage %} {% seo title=false %} {% assign collectiondata =
