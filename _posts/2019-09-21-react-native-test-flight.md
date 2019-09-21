@@ -17,6 +17,7 @@ image: "https://images.unsplash.com/photo-1556656793-08538906a9f8?ixlib=rb-1.2.1
 ## iOS TestFlight 소개
 
 TestFlight은 아직 정식으로 앱스토어에 출시되지 않은 앱을 베타테스트 할 수 있도록 돕는 도구이다.
+정식 심사보다 간결한 심사를 통과하기에, 심사 전 앱을 테스트해 보는 것에 적격이다.
 
 앱스토어에 TestFlight을 검색하여 앱을 설치할 수 있고, 베타 테스트 링크를 메일로 전송받은 사용자들이 TestFlight앱을 활용해 베타 테스트에 참여할 수 있다.
 
