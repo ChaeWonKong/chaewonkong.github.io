@@ -23,8 +23,9 @@ excerpt: "Node.js, React, React native, Algorithm with Python"
 
 #### 막차
 
-- [막차-앱스토어](https://apps.apple.com/kr/app/막차/id1480522844)
-- [막차-구글 플레이 스토어](https://play.google.com/store/apps/details?id=com.native_makkcha)
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/mock.jpeg?raw=true" />
+- [막차 - Apple App Store LINK](https://apps.apple.com/kr/app/막차/id1480522844)
+- [막차 - Google Play Store LINK](https://play.google.com/store/apps/details?id=com.native_makkcha)
 
 #### 하루시작
 
