@@ -1,14 +1,14 @@
 ---
 layout: post
-title: "React Native 앱을 빌드해 앱스토어(App Store)에 배포하기"
+title: "React Native - iOS 앱 빌드 및 앱스토어(App Store) 배포"
 date: "2019-09-21"
 categories:
-  - ReactNative
+  - React-Native
 excerpt: |
-  React Native로 작성한 앱을 빌드하고 앱 스토어(App Store)에 배포하기
+  React Native - iOS 앱 빌드 및 앱스토어(App Store) 배포
 feature_text: |
-  ## React Native로 작성한 앱을 빌드하고 앱 스토어(App Store)에 배포하기
-  React Native로 작성한 앱을 앱 스토어(Apple App Store)에 업로드하고 배포하는 방법을 알아본다. 그 과정에서 X-Code 에러를 핸들링하고 성공한 빌드를 앱스토어에 올린 후 심사를 요청하는 전 과정을 알아본다.
+  ## React Native - iOS 앱 빌드 및 앱스토어(App Store) 배포
+  React Native로 작성한 iOS 앱을 빌드하고 앱스토어(Apple App Store)에 업로드하고 배포하는 방법을 알아본다. 그 과정에서 X-Code 에러를 핸들링하고 성공한 빌드를 앱스토어에 올린 후 심사를 요청하는 전 과정을 알아본다.
 feature_image: "https://images.unsplash.com/photo-1457803097035-3ace37af34a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
 image: "https://images.unsplash.com/photo-1457803097035-3ace37af34a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
 ---
