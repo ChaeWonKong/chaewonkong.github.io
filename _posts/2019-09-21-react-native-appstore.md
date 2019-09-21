@@ -21,11 +21,11 @@ image: "https://images.unsplash.com/photo-1457803097035-3ace37af34a7?ixlib=rb-1.
 
 "ios/[프로젝트명].xcodeproj"를 열어도 되지만, 빌드가 안되는 에러가 발생하는 경우가 많다. 따라서 "[프로젝트명].xcworkspace"로 빌드를 진행하는 것을 추천한다.
 
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/xcode1.png?raw=true" width="80%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/xcode1.png?raw=true" width="100%" />
 먼저 General 탭에서 정보들이 정상적으로 기입되었는지 확인한다. 제일 중요한 것은 Sinning 부분이다.
 팀이 제대로 설정되어 있는지 확인한다.
 
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/xcode2.png?raw=true" width="80%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/xcode2.png?raw=true" width="100%" />
 info.plist도 잘 확인한다. 문제가 있을 경우 빌드가 실패할 수도 있고, 빌드가 성공하더라도 앱스토어에서 리젝(reject) 당할 수 있다.
 저자의 경우 사진의 "Privacy - Location Always Usage Description" 항목을 영어로 작성하였는데, "위치정보 사용 동의"를 요청하는 모달의 경고문구에 해당하는 항목이다. 한국인을 대상으로 한국어로 서비스 되는 앱에서 경고 모달이 영어로 뜬 것은 접근성에 문제가 있는 것이라는 메세지와 함께 앱 심사 리젝을 당한 바 있다.
 
@@ -39,7 +39,7 @@ info.plist도 잘 확인한다. 문제가 있을 경우 빌드가 실패할 수�
 ios 빌드용 인증서가 필요한데, 이 부분은 자세히 설명한 다른 블로그가 있어 해당 링크로 설명을 대신한다.
 [iOS 인증서(Certification)](https://dev-yakuza.github.io/ko/react-native/ios-certification/)
 
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/schema.png?raw=true" width="80%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/schema.png?raw=true" width="100%" />
 상단 메뉴 탭에서 scheme을 변경할 것이다.
 products > scheme > edit scheme의 Build Configuration을 "Release"로 변경한다.
 
@@ -76,7 +76,7 @@ products > scheme > edit scheme의 Build Configuration을 "Release"로 변경한
 
 빌드 과정에서 errSecInternalComponent와 관련된 에러가 발생하였다.
 
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/errSecInternalComponent.png?raw=true" width="80%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/errSecInternalComponent.png?raw=true" width="100%" />
 이 에러의 경우 Launchpad에서 기타 > 키체인 접근에 들어간 후, 메뉴 탭의 파일 > 모든 키체인 잠금 을 클릭한 후 다시 빌드를 시도해 보면 해결된다.
 
 ## 앱 스토어 업로드
@@ -88,31 +88,31 @@ products > scheme > edit scheme의 Build Configuration을 "Release"로 변경한
 
 만약 앱스토어 커넥트(AppStoreConnect)에 새 앱을 추가하지 않았다면 아래의 "신규 앱 추가" 부분을 먼저 진행한 후 업로드 절차를 진행하도록 한다.
 
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload1.png?raw=true" width="80%" />
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload2.png?raw=true" width="80%" />
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload3.png?raw=true" width="80%" />
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload4.png?raw=true" width="80%" />
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload5.png?raw=true" width="80%" />
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload6.png?raw=true" width="80%" />
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload7.png?raw=true" width="80%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload1.png?raw=true" width="100%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload2.png?raw=true" width="100%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload3.png?raw=true" width="100%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload4.png?raw=true" width="100%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload5.png?raw=true" width="100%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload6.png?raw=true" width="100%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/upload7.png?raw=true" width="100%" />
 
 ## 앱스토어 커넥트를 통한 앱 제출과 심사
 
 [앱스토어 커넥트](https://appstoreconnect.apple.com/)에 들어가 업로드 된 앱을 제출해보자.
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/connect1.png?raw=true" width="80%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/connect1.png?raw=true" width="100%" />
 여기서 "나의 앱"을 클릭한다.
 
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/connect2.png?raw=true" width="80%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/connect2.png?raw=true" width="100%" />
 본인의 앱을 만들었으면 본인의 앱을, 만들지 않았으면 "+"를 클릭해 추가한다.
 
 ### 신규 앱 추가
 
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/connect4.png?raw=true" width="80%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/connect4.png?raw=true" width="100%" />
 신규 앱을 추가하는 화면이다.
 번들 ID는 X-code의 General에서 제공한 번들 Identifier와 정확히 동일해야 한다.
 SKU는 적당히 지어내서 올리면 된다.
 
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/connect3.png?raw=true" width="80%" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/appstore/connect3.png?raw=true" width="100%" />
 이제 앱을 추가하자. 중요한 부분은 아래에 자세히 정리해 두었다.
 
 ### 스크린샷
