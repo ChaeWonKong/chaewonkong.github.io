@@ -21,13 +21,16 @@ excerpt: "Node.js, React, React native, Algorithm with Python"
 
 ## Projects
 
-#### 막차
+### 막차
 
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/mock.jpeg?raw=true" />
+쉽고 빠르게 막차를 검색할 수 있는 앱입니다.
+
 - [막차 - Apple App Store LINK](https://apps.apple.com/kr/app/막차/id1480522844)
 - [막차 - Google Play Store LINK](https://play.google.com/store/apps/details?id=com.native_makkcha)
 
-#### 하루시작
+### 하루시작
+
+하루 하나의 주제를 던져주고 한 편의 시를 쓰게 하는 웹앱입니다.
 
 - [하루시작-하루 한편 시쓰기](https://harusijak.com)
 
