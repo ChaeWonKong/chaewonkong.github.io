@@ -3,7 +3,7 @@ layout: post
 title: "Git에 커밋 된 커밋하면 안될 파일 제거하기"
 date: "2019-09-20"
 categories:
-  - git
+  - Git
 excerpt: |
   React Native에서 안드로이드를 빌드하는 과정에서 git에 실수로 커밋된 hprof 대용량 파일을 git에서 삭제하는 방법을 알아본다. 커밋하면 안될 파일이 커밋된 경우, 찾아서 삭제하는 방법을 알아본다.
 feature_text: |
@@ -14,6 +14,7 @@ image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?ixlib=rb-1.2.1
 ---
 
 ## 발생한 에러
+
 ```cmd
 $ remote: error: File android/java_pid57988.hprof is 490.48 MB; this exceeds GitHub's file size limit of 100.00 MB
 ```
@@ -25,11 +26,13 @@ React Native에서 안드로이드를 빌드하다 보면 "android/java_pid57988
 이를 해결하기 위해서는 해당 파일을 깃이 추적하지 않도록 삭제해야 한다.
 
 ## 해결방법
+
 ```cmd
 $ git filter-branch --tree-filter 'rm -rf <path/to/filename>' HEAD
 ```
 
 사용예:
+
 ```cmd
 $ git filter-branch --tree-filter 'rm -rf android/java_pid57988.hprof' HEAD
 ```
