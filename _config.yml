@@ -23,6 +23,9 @@ url: http://chaewonkong.github.io
 baseurl: ""
 paginate: 1
 
+# Category
+category_dir: category/
+
 # About/contact
 author:
   name: Chaewon Kong
