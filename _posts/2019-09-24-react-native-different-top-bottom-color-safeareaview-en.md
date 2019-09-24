@@ -1,14 +1,14 @@
 ---
 layout: post
-title: "React Native - Set Different Colors to Top and Bottom of SafeAreaView"
+title: "React Native - iOS Set Different Colors to Top and Bottom of SafeAreaView"
 date: "2019-09-24"
 categories:
   - React-Native
 excerpt: |
-  React Native - Set Different Colors to Top and Bottom of SafeAreaView
+  React Native - iOS Set Different Colors to Top and Bottom of SafeAreaView
   Set different colors to top and bottom padding of SafeAreaView(change default padding color of white to else).
 feature_text: |
-  ## React Native - Set Different Colors to Top and Bottom of SafeAreaView
+  ## React Native - iOS Set Different Colors to Top and Bottom of SafeAreaView
   Set different colors to top and bottom padding of SafeAreaView(change default padding color of white to else).
 feature_image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
 image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
@@ -26,6 +26,8 @@ When creating app, sometimes it is needed to apply different colors to top and b
 ```
 react >= 16.2.0
 ```
+
+We are gonna use Fragment imported from React. Fragment is available in React version above 16.2.0.
 
 Default usage of SafeAreaView will like:
 
@@ -81,6 +83,7 @@ export default class App extends Component {
 ```
 
 StatusBar component sets text color of top-side status bar containing time, battery and network connection status.
+Let's change StatusBar text color to white:
 
 ```
 barStyle="light-content"
