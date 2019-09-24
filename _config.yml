@@ -1,7 +1,7 @@
 # Permalinks
 #
 # Use of `relative_permalinks` ensures post links from the index work properly.
-markdown: redcarpet
+markdown: kramdown
 highlighter: rouge
 # kramdown:
 #   input: GFM

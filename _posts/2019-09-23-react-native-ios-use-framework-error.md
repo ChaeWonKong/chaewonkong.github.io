@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "React Native - 'use_frameworks!' Generates 'double-conversion.h file not found' Build Error for RN >= 0.60"
-date: "2019-09-21"
+date: "2019-09-23"
 categories:
   - React-Native
 excerpt: |
@@ -27,8 +27,7 @@ This issue has been tracked by Facebook and Facebook is prepairing workarounds a
 
 [SOURCE: StackOverflow LINK](https://stackoverflow.com/questions/57152569/double-conversion-double-conversion-h-file-not-found)
 
-> CocoaPods are now part of React Native's iOS project. If you weren't already, be sure to open iOS platform code using the xcworkspace file from now on (protip: try xed ios from the root project directory). Also, the podspecs for the internal packages have changed to make them compatible with the Xcode projects, which will help with troubleshooting and debugging. Expect to make some straightforward changes to your Podfile as part of the upgrade to 0.60 to bring this exciting support. Note that we are aware of a compatability issue with use_frameworks!, and we're tracking an issue with workarounds and a future patch.
-> [SOURCE: Official React Native 0.60 Release Note](https://facebook.github.io/react-native/blog/2019/07/03/version-60#cocoapods-by-default)
+> CocoaPods are now part of React Native's iOS project. If you weren't already, be sure to open iOS platform code using the xcworkspace file from now on (protip: try xed ios from the root project directory). Also, the podspecs for the internal packages have changed to make them compatible with the Xcode projects, which will help with troubleshooting and debugging. Expect to make some straightforward changes to your Podfile as part of the upgrade to 0.60 to bring this exciting support. **Note that we are aware of a compatability issue with use_frameworks!, and we're tracking an issue with workarounds and a future patch.** > [SOURCE: Official React Native 0.60 Release Note](https://facebook.github.io/react-native/blog/2019/07/03/version-60#cocoapods-by-default)
 
 ## 한국어
 
