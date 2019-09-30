@@ -33,13 +33,14 @@
  */
 
 /* Prevent scroll on narrow devices */
+@import url("https://fonts.googleapis.com/css?family=Noto+Serif+KR:400,700&display=swap");
 html,
 body {
   overflow-x: hidden;
 }
 
 html {
-  font-family: "PT Serif", Georgia, "Times New Roman", serif;
+  font-family: "Noto Serif KR", serif;
 }
 
 h1,
@@ -404,6 +405,7 @@ a.sidebar-nav-item:focus {
 .page,
 .post {
   margin-bottom: 4em;
+  line-height: 2;
 }
 
 /* Blog post or page title */
