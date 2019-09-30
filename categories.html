@@ -6,7 +6,7 @@ title: Categories
 <div class="page">
   <h1 class="post-title">{{ page.title }}</h1>
   <hr />
-  {% for category in site.categories %}
+  {% for category in site.categories reversed %}
   <h2>{{ category | first }}</h2>
   {% for posts in category %} {% for post in posts %}
   <a href="{{ site.baseurl }}{{ post.url }}"
