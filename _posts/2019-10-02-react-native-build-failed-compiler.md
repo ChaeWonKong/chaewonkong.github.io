@@ -17,9 +17,10 @@ Build failure in debug.
 Build Succeeds in Xcode but Fails in terminal when running `react-native run-ios`.
 
 Original Error:
-<img src="https://github.com/ChaeWonKong/image-resource/blob/master/e1.png?raw=true" height="450px" />
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/e1.png?raw=true" width="100%" />
 
 ## Possible Solutions
+
 ### Deleting Xcode Cache
 
 ```cmd
@@ -49,6 +50,6 @@ $ rm -rf ios/build/*
 This is the only solution that worked for me. After removing all node_modules and yarn.lock file, I removed all files and sub-directories under ios/build.
 Then, I ran `react-native run-ios` again, and it finally worked.
 
-
 ## References
+
 - [Facebook React Native Github Issue - After upgrading to react-native 0.59 iOS build fails #23886](https://github.com/facebook/react-native/issues/23886)
