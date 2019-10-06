@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "React Native - build commands failed: DoubleConversion-dummy.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler"
-date: "2019-09-30"
+date: "2019-10-02"
 categories:
   - React-Native
 excerpt: |
