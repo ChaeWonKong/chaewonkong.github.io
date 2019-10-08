@@ -402,6 +402,31 @@ a.sidebar-nav-item:focus {
  * page is wrapped in `.page` and is only used on the page layout.
  */
 
+/* Category */
+.category-container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* flex: 1; */
+}
+.category-card {
+  width: 100%;
+}
+.category-box {
+  width: 100%;
+  /* display: flex; */
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  /* word-wrap: break-word; */
+  word-break: break-all;
+  /* overflow: hidden; */
+}
+
 .page,
 .post {
   margin-bottom: 4em;

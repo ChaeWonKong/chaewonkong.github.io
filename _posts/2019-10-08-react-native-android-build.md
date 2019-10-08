@@ -5,7 +5,6 @@ date: "2019-10-08"
 categories:
   - React-Native
 excerpt: |
-  React Native - 안드로이드 앱을 빌드하고 구글 플레이 스토어에 배포하자
   React Native 프로젝트를 안드로이드 앱으로 빌드하고 구글 플레이 스토어에 배포하는 방법을 알아본다. 안드로이드(구글) 개발자 등록부터 서명 키 발급, 빌드, 업로드 및 배포까지 차근차근 살펴본다.
 feature_text: |
   ## React Native - 안드로이드 앱을 빌드하고 구글 플레이 스토어에 배포하자

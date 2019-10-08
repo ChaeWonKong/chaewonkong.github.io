@@ -8,11 +8,21 @@ title: Categories
   <hr />
   {% for category in site.categories reversed %}
   <h2>{{ category | first }}</h2>
-  {% for posts in category %} {% for post in posts %}
-  <a href="{{ site.baseurl }}{{ post.url }}"
-    ><p>{{ post.title }}</p></a
-  >
-  {% endfor %} {% endfor %}
+
+  {% for posts in category %}
+  <div class="category-container">
+    {% for post in posts %} {% if post.title %}
+    <div class="category-box">
+      <a href="{{ site.baseurl }}{{ post.url }}">
+        <h3>{{ post.title }}</h3>
+        <!-- <img src="{{ post.image }}" /> -->
+        <p>{{ post.excerpt | truncatewords: 30 }}</p></a
+      >
+    </div>
+    {% endif %} {% endfor %}
+  </div>
+  {% endfor %}
+
   <hr />
   {% endfor %}
   <!-- {% for post in site.posts %}
