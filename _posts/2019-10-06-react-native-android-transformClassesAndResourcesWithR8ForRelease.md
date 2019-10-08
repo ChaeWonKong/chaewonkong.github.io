@@ -33,6 +33,56 @@ Execution failed for task ':app:transformClassesAndResourcesWithR8ForRelease'.
 > com.android.tools.r8.CompilationFailedException: Compilation failed to complete
 ```
 
-|  Dependency  | Version |
-| :----------: | :-----: |
-| React Native | 0.60.4  |
+|     Dependency     | Version |
+| :----------------: | :-----: |
+|    react-native    | 0.60.4  |
+|   google-service   |  4.3.2  |
+| firebase-analytics | 17.2.0  |
+
+## Possible Solutions
+
+### Removing build files and caches
+
+```cmd
+cd adnroid && ./gradlew clean
+./gradlew assembleRelease
+cd ..
+```
+
+It is the easiest way for the most of build failures, yet in my case it didn't work.
+
+### Sync Project With Gradle File in Android studio
+
+Open the project in Android Studio and click **"Sync Project With Gradle File"** button. Since I deleted node_modules and yarn.lock for previus iOS build failure, I thought I might have to sync my gradle file again.
+
+It didn't work.
+
+### Jetify
+
+Since, I removed and reinstalled dependencies, I ran `yarn jetify`.
+It didn't make build successful.
+
+### Disable R8
+
+Build error seems to be related to R8, so I manually added `android.enableR8 = false` to android/gradle.properties file.
+Yet I encountered another build error:
+
+```cmd
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:transformClassesWithDexBuilderForRelease'.
+> com.android.build.api.transform.TransformException: java.lang.ArrayIndexOutOfBoundsException
+```
+
+### Downgrade Google Services Version
+
+The latest dependency I added was things related to firebase-analytics. So I tried to check whether some of versions might not working with react-native project.
+
+|     Dependency     | Version |
+| :----------------: | :-----: |
+|    react-native    | 0.60.4  |
+|  google-services   |  4.3.2  |
+| firebase-analytics | 17.2.0  |
+
+So I commented each dependencies related to firebase, and test building. I found that **"google-services"** is the curprit. **Downgrading "google-services version from 4.3.2 to 4.3.1 solved my build error.**
