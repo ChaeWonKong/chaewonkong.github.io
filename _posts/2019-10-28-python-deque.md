@@ -3,7 +3,7 @@ layout: post
 title: "Python - 데크(deque) 언제, 왜 사용해야 하는가?"
 date: "2019-10-28"
 categories:
-  - python
+  - Python
 excerpt: |
   Python의 데크(deque)에 대해 알아보고 언제, 왜 써야 하는지 살펴본다
 feature_text: |
