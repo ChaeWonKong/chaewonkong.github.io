@@ -89,9 +89,7 @@ export interface ISimplePost {
   author: string;
 }
 
-export interface IPosts {
-  posts: ISimplePost[];
-}
+export type IPosts =ISimplePost[]
 ```
 
 <p id="2" />
@@ -129,9 +127,9 @@ export enum POSTS_ACTION_TYPES {
 }
 
 export type GetPostAction = {
-  type: string;
-  payload: IPosts;
-};
+    type: string,
+    payload: ISimplePost[]
+}
 
 export type PostListState = {
   posts: ISimplePost[];
@@ -158,7 +156,7 @@ actions 폴더 안에 index.ts 파일을 생성한다.
 import { GetPostAction, POSTS_ACTION_TYPES } from "./types";
 import { IPosts } from "../shared-interfaces";
 
-export const getPosts = (posts: IPosts): GetPostAction => ({
+export const getPosts = (posts: ISimplePost[]): GetPostAction => ({
   type: POSTS_ACTION_TYPES.GET_POSTS,
   payload: posts
 });
@@ -212,7 +210,7 @@ export const postList = (
   const newState: PostListState = _.cloneDeep(state);
   switch (action.type) {
     case POSTS_ACTION_TYPES.GET_POSTS:
-      return { ...initalState, ...action.payload };
+      return {posts: [...initalState.posts, ...action.payload]}
     default:
       return newState;
   }
@@ -310,10 +308,14 @@ const List: React.FC<IProps> = props => {
   }, []);
 
   const getPosts = async (): Promise<void> => {
-    const res = await tubesdayApi.getAllPosts();
-    const posts = res.data;
-    props.onGetPosts(posts);
-    setPosts(posts);
+    try {
+      const res = await tubesdayApi.getAllPosts();
+      const posts = res.data;
+      props.onGetPosts(posts);
+      setPosts(posts);
+    } catch (err) {
+      console.log('Fetch Failed', err)
+    }
   };
 
   function renderVideoList() {
@@ -334,9 +336,9 @@ const List: React.FC<IProps> = props => {
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  posts: state.postList
-});
+const mapStateToProps = (state: AppState) => {
+  return { posts: state.postList.posts }
+}
 
 const mapDispatchToProps = (dispatch: any) => ({
   onGetPosts: bindActionCreators(getPosts, dispatch)
@@ -379,9 +381,9 @@ export default connect(
 마지막으로 mapStateToProps에서 state의 타입을 지정하기 위해 actions/type.ts에서 AppState라는 타입을 가져왔다.
 
 ```tsx
-const mapStateToProps = (state: AppState) => ({
-  posts: state.postList
-});
+const mapStateToProps = (state: AppState) => {
+  return { posts: state.postList.posts }
+}
 
 const mapDispatchToProps = (dispatch: any) => ({
   onGetPosts: bindActionCreators(getPosts, dispatch)
@@ -415,11 +417,14 @@ const List: React.FC<IProps> = props => {
   }, []);
 
   const getPosts = async (): Promise<void> => {
-    const res = await tubesdayApi.getAllPosts();
-    const posts = res.data;
-    props.onGetPosts(posts);
-    setPosts(posts);
-  };
+    try {
+      const res = await tubesdayApi.getAllPosts();
+      const posts = res.data;
+      props.onGetPosts(posts);
+      setPosts(posts);
+    } catch (err) {
+      console.log('Fetch Failed', err)
+    }
 };
 ```
 
@@ -432,10 +437,14 @@ React.useEffect나 React.useState에 관한 부분은 Hooks 관련된 자료를 
 
 ```tsx
 const getPosts = async (): Promise<void> => {
-  const res = await tubesdayApi.getAllPosts();
-  const posts = res.data;
-  props.onGetPosts(posts);
-  setPosts(posts);
+  try {
+      const res = await tubesdayApi.getAllPosts();
+      const posts = res.data;
+      props.onGetPosts(posts);
+      setPosts(posts);
+    } catch (err) {
+      console.log('Fetch Failed', err)
+    }
 };
 ```
 
