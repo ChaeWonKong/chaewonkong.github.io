@@ -14,9 +14,9 @@ excerpt: "Node.js, React, React native, Algorithm with Python"
 
 ## Technical Skills Summary
 
-- Languages: JavaScript(전문), Python, TypeScript, C++
+- Languages: JavaScript(전문), TypeScript, Python, C++
 - Frontend(전문): React, React Native, Redux, Electron
-- Backend(보통): Node / Express.js, GraphQL, MongoDB, Socket.io
+- Backend(보통): Node / Express.js, Serverless Framework, MongoDB, Socket.io
 - Etc: AWS Elb, EC2, S3, Route 53, RDS, Lambda, API Gateway
 
 ## Projects
