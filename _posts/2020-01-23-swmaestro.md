@@ -3,7 +3,7 @@ layout: post
 title: "SW마에스트로(소프트웨어 마에스트로) 10기 활동을 하며 내가 얻은 것들"
 date: "2020-01-20"
 categories:
-  - React
+  - dev
 excerpt: |
   2019년 한 해 동안 SW마에스트로 활동을 하며 제가 얻은 것들을 정리해봤습니다.
 feature_text: |
