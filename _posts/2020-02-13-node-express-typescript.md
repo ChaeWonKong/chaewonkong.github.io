@@ -5,7 +5,7 @@ date: "2020-02-13"
 categories:
   - Node.js
 excerpt: |
-  Lerna, React, TypeScript를 활용한 모노리포 세팅(번역)
+  Setting Up server that uses Node/Express.js with TypeScript.
 feature_text: |
   ## How to Set up Node/Express server with TypeScript
   Setting Up server that uses Node/Express.js with TypeScript.
