@@ -5,17 +5,24 @@ title: Categories
 
 <div class="page">
   <h1 class="post-title">{{ page.title }}</h1>
-  <hr />
-  {% for category in site.categories reversed %}
-  <h2 style="font-weight: 600">{{ category | first }}</h2>
+  <div class="category-container">
+    {% for category in site.categories %}
+    <div class="category-box">
+      <p style="font-weight: 600">
+        {{ category | first }}
+      </p>
+      <img
+        src="https://github.com/ChaeWonKong/image-resource/blob/master/{{ category | first }}.jpg?raw=true"
+      />
 
+      <!--
   {% for posts in category %}
   <div class="category-container">
     {% for post in posts %} {% if post.title %}
     <div class="category-box">
       <a href="{{ site.baseurl }}{{ post.url }}">
         <h3 class="category-headline">{{ post.title }}</h3>
-        <!-- <img src="{{ post.image }}" /> -->
+        
         <p class="category-excerpt">
           {{ post.excerpt | truncatewords: 30 }}
         </p></a
@@ -24,9 +31,12 @@ title: Categories
     {% endif %} {% endfor %}
   </div>
   {% endfor %}
+-->
 
-  <hr />
-  {% endfor %}
+      <!-- <hr /> -->
+    </div>
+    {% endfor %}
+  </div>
   <!-- {% for post in site.posts %}
   <h3 class="post-title"><a href="{{ site.baseurl }}{{ post.url }}"
     >{{ post.title }}</a></h1>
