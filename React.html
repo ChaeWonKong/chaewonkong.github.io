@@ -1,0 +1,24 @@
+---
+layout: page
+title: React
+---
+
+<div class="page">
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="category-container">
+    {% for post in site.categories.React %} {% if post.title %}
+    <div class="category-box">
+      <a href="{{ site.baseurl }}{{ post.url }}">
+        <h3 class="category-headline">{{ post.title }}</h3>
+        <p class="category-excerpt">
+          {{ post.excerpt | truncatewords: 30 }}
+        </p></a
+      >
+    </div>
+    {% endif %}
+
+    <hr />
+
+    {% endfor %}
+  </div>
+</div>

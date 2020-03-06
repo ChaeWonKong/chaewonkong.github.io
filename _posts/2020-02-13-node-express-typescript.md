@@ -3,7 +3,7 @@ layout: post
 title: "How to Set up Node/Express server with TypeScript"
 date: "2020-02-13"
 categories:
-  - Node.js
+  - NodeJS
 excerpt: |
   Setting Up server that uses Node/Express.js with TypeScript.
 feature_text: |

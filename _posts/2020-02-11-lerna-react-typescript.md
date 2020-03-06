@@ -3,7 +3,7 @@ layout: post
 title: "Lerna, React, TypeScript를 활용한 모노리포 세팅(번역)"
 date: "2020-02-11"
 categories:
-  - DevLog
+  - JavaScript
 excerpt: |
   Lerna, React, TypeScript를 활용한 모노리포 세팅(번역)
 feature_text: |

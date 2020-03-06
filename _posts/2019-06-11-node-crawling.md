@@ -3,7 +3,7 @@ layout: post
 title: "JavaScript 웹 크롤링 하기"
 date: "2019-06-11"
 categories:
-  - Node.js
+  - NodeJS
 excerpt: |
   Node.js와 axios, cheerio를 활용해 웹 크롤러를 만들어 본다.
 feature_text: |

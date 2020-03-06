@@ -8,14 +8,15 @@ title: Categories
   <div class="category-container">
     {% for category in site.categories %}
     <div class="category-box">
-      <p style="font-weight: 600">
-        {{ category | first }}
-      </p>
-      <img
-        src="https://github.com/ChaeWonKong/image-resource/blob/master/{{ category | first }}.jpg?raw=true"
-      />
+      <a href="{{ site.baseurl }}{{ category | first }}.html">
+        <p style="font-weight: 600">
+          {{ category | first }}
+        </p>
+        <img
+          src="https://github.com/ChaeWonKong/image-resource/blob/master/categories/{{ category | first }}.jpg?raw=true"
+        />
 
-      <!--
+        <!--
   {% for posts in category %}
   <div class="category-container">
     {% for post in posts %} {% if post.title %}
@@ -33,7 +34,8 @@ title: Categories
   {% endfor %}
 -->
 
-      <!-- <hr /> -->
+        <!-- <hr /> -->
+      </a>
     </div>
     {% endfor %}
   </div>
