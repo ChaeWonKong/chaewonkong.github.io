@@ -37,10 +37,11 @@
 html,
 body {
   overflow-x: hidden;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 html {
-  font-family: "Noto Serif KR", serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 h1,
@@ -49,7 +50,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "PT Sans", Helvetica, Arial, sans-serif;
+  /* font-family: "PT Sans", Helvetica, Arial, sans-serif; */
+  font-family: "Noto Sans KR", sans-serif;
   font-weight: 400;
   color: #313131;
   letter-spacing: -0.025rem;
