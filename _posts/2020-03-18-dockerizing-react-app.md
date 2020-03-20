@@ -89,7 +89,7 @@ $ docker build -t react-dockerize:dev .
 그리고 이미지를 실행하도록 할게요.
 
 ```shell
-$ docker run -v ${PWD}:/app -v /app/node_modules -p 3001: 3000 --rm react-dockerize:dev
+$ docker run -v ${PWD}:/app -v /app/node_modules -p 3001:3000 --rm react-dockerize:dev
 ```
 
 자 갑자기 너무 어려운 명령어들의 향연이죠?
@@ -134,7 +134,7 @@ services:
 위에서는
 
 ```shell
-$ docker run -v ${PWD}:/app -v /app/node_modules -p 3001: 3000 --rm react-dockerize:dev
+$ docker run -v ${PWD}:/app -v /app/node_modules -p 3001:3000 --rm react-dockerize:dev
 ```
 
 요런 복잡하고 긴 명령으로 도커 컨테이너를 띄웠습니다. (도커는 고래여서 물에 둥둥 뜬다고 합니다..)
