@@ -5,10 +5,10 @@ date: "2020-04-19"
 categories:
   - React
 excerpt: |
-  Jest와 Enzyme을 이용해 TypeScript 기반의 React에서 Custom Hook을 테스트하는 방법들을 알아본다.
+  Jest와 Enzyme을 이용해 TypeScript 기반의 React에서 API 요청을 담당하는 Custom Hook을 테스트하는 방법들을 알아본다.
 feature_text: |
   ## Jest와 Enzyme을 이용한 React 커스텀 훅(custom hook) 테스팅(test)
-  Jest와 Enzyme을 이용해 TypeScript 기반의 React에서 Custom Hook을 테스트하는 방법들을 알아본다.
+  Jest와 Enzyme을 이용해 TypeScript 기반의 React에서 API 요청을 담당하는 Custom Hook을 테스트하는 방법들을 알아본다.
 feature_image: "https://images.unsplash.com/photo-1547110543-a2af5c37f597?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
 image: "https://images.unsplash.com/photo-1547110543-a2af5c37f597?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
 ---
@@ -26,6 +26,10 @@ React의 테스트를 위해 흔히 사용되는 **Jest와 Enzyme**을 사용해
 
 ## 목표
 
+### API 명세
+
+우리가 테스트하려는 Custom Hook에서는 아래 API를 호출한다.
+
 ```tsx
 interface Article {
   id: number;
@@ -41,6 +45,8 @@ export const getArticle = (id: number): Article => {
   return res.data;
 };
 ```
+
+### 테스트하려는 Custom Hook
 
 우리가 Test할 React Custom Hook은 아래와 같다.
 
@@ -63,6 +69,10 @@ export const useFetchArticle = (id: number) => {
 };
 ```
 
+우리의 Custom Hook은 실행될 때 `fetchArticle`이라는 함수를 호출한다.
+`fetchArticle`은 비동기적으로 `getArticle`을 호출하여 API 요청을 진행하고 response를 `useState`를 이용해 `article`에 저장한다.
+우리의 커스텀 훅은 `{ article }`을 리턴한다.
+
 ## 의존 라이브러리
 
 우리는 Jest와 Enzyme, testing-library/react-hook 이 세 가지를 이용할 것이다.
@@ -77,6 +87,8 @@ npm install --save-dev @testing-library/react-hooks
 ```
 
 ## 테스트 코드
+
+### Mock Data 생성
 
 **useFetchArticle.test.ts**
 
@@ -99,6 +111,8 @@ const mockID = 1234;
 
 먼저 필요한 파일들을 import 하고, api 요청을 mocking하기 위한 더미데이터인 `mockData`를 만든다.
 
+### API 호출을 Mocking하는 함수 작성
+
 다음으로 테스트를 위한 블록을 생성하는데, 각 테스트 실행 전 호출될 api를 mocking하여 mockData를 반환하도록 해준다.
 
 `mockID`는 `useFetchArticle`에 매개변수로 넘겨주려는 것으로, 사실 어떤 것으로 설정하든 상관은 없다.
@@ -119,13 +133,13 @@ describe("Test for `useFetchArticle`", () => {
 
 자세한 내용은 [jest 문서](https://jestjs.io/docs/en/jest-object)를 확인하자.
 
+### 테스트 케이스 작성
+
 다음으로 테스트 케이스를 작성한다.
 
 ```tsx
 it("returns article correctly", async () => {
-  const { result, waitForNextUpdate } = renderHook(() =>
-    useFetchArticle(mockID)
-  );
+  const { result, waitForNextUpdate } = renderHook(useFetchArticle);
   await waitForNextUpdate();
 
   expect(result.current.article).toStrictEqual(mockData);
@@ -133,12 +147,15 @@ it("returns article correctly", async () => {
 ```
 
 우리의 테스트 케이스는 3가지 로직으로 작성된다.
-첫번째 줄에서 실제처럼 `useFetchArticle`이 작동하여 결과값을 반환하게 한다.
-두번째 줄에서 비동기적으로 실행될 `useFetchArticle`내의 `useEffect`가 실행완료되길 기다린다.
-세번째 줄에서 결과값이 우리가 예상한 값과 같은지 비교한다.
 
-참고로 `renderHook`은 `result.current` 객체 내부에 렌더링된 커스텀 훅의 return 값을 포함한다.
-우리는 `useFetchArticle`에서 `{article}`을 리턴했기 때문에 `result.current.article`로 접근하여 가져올 수 있는 것이다.
+1. 첫번째 줄에서 실제처럼 `useFetchArticle`이 작동하여 결과값을 반환하게 한다.
+2. 두번째 줄에서 `await waitForNextUpdate();`를 통해 비동기적으로 실행될 `useFetchArticle`내의 `useEffect`가 실행완료되길 기다린다.
+3. 세번째 줄에서 결과값이 우리가 예상한 값과 같은지 비교한다.
+
+참고로 `renderHook`은 `result.current` 객체는 렌더링된 커스텀 훅의 return 값을 포함한다.
+우리는 `useFetchArticle`에서 `{ article }`을 리턴했기 때문에 `result.current.article`로 접근하여 가져올 수 있는 것이다.
+
+### 전체 코드
 
 우리가 작성한 전체 테스트 코드는 아래와 같다.
 
@@ -164,7 +181,7 @@ describe("Test for `useFetchArticle`", () => {
   })
 
   it('returns article correctly', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useFetchArticle(mockID))
+    const { result, waitForNextUpdate } = renderHook(useFetchArticle);
     await waitForNextUpdate()
 
     expect(result.current.article).toStrictEqual(mockData)
@@ -173,3 +190,10 @@ describe("Test for `useFetchArticle`", () => {
 ```
 
 테스트를 실행해 정상적으로 동작하는지 확인한다.
+
+## 결론
+
+Jest와 Enzyme은 훌륭한 테스트 도구지만, React의 함수형 컴포넌트를 제한적으로 지원한다는 것이 안타깝다.
+특히 Hook, Custom Hook의 테스트가 쉽지 않다.
+
+위 방법을 이용하면 Custom Hook에서 API 요청을 할 경우, 그 함수를 mocking함으로써 Custom Hook을 테스트할 수 있다.
