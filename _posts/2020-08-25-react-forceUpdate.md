@@ -21,7 +21,7 @@ Long long time ago, there were class-based components and they had something cal
 Nowadays, almost nobody uses class-based components, and functional components and hooks dominates all over the world. We have magnificent hooks like useState, useEffect, useRef, useReducers, and so on. However, we no more have something simillar to forceUpdate.
 
 ## TL;DR
-you can use `useReducer` to create your own forceUpdate.
+You can use `useReducer` to create your own forceUpdate.
 
 ```tsx
 const [, forceUpdate] = useReducer(x => x + 1, 0);
