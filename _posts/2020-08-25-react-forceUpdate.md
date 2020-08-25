@@ -13,7 +13,6 @@ feature_image: "https://images.unsplash.com/photo-1590595906931-81f04f0ccebb?ixl
 image: "https://images.unsplash.com/photo-1590595906931-81f04f0ccebb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
 ---
 
-# How to Implement React forceUpdate in Functional Component
 Usually we modify states to update and re-render a component. It satisfies us mostly. But sometimes, we have to re-render the component manually.
 
 Long long time ago, there were class-based components and they had something called forceUpdate. When you call forceUpdate function, it manually updated the component and make it to re-render.
