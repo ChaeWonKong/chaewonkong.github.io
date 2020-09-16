@@ -1,0 +1,20 @@
+---
+layout: page
+title: TIL
+---
+
+<div class="page">
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="category-container">
+    {% for post in site.categories.TIL %}
+    <div class="list-item">
+      <a href="{{ site.baseurl }}{{ post.url }}">
+        <h3 class="list-headline">{{ post.title }}</h3>
+        <p class="list-excerpt">
+          {{ post.excerpt | truncatewords: 30 }}
+        </p>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>

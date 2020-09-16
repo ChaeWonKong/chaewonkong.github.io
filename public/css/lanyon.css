@@ -440,6 +440,26 @@ a.sidebar-nav-item:focus {
   color: black;
 }
 
+/* List */
+.list-item {
+  margin: 1rem 0;
+}
+
+.list-headline {
+  margin: 0;
+  font-weight: 500;
+}
+
+.list-headline:hover {
+  color: #707070;
+}
+
+.list-excerpt {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: black;
+}
+
 .page,
 .post {
   margin-bottom: 4em;
