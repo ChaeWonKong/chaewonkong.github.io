@@ -1,16 +1,16 @@
 ---
 layout: post
-title: "[TIL] Go"
+title: "[TIL] Go - Array, slide, map, struct"
 date: "2020-09-16"
 categories:
   - TIL
 excerpt: |
-  How to Implement React forceUpdate in Functional Component
+  Array, slide, map, struct
 feature_text: |
-  ## How to Implement React forceUpdate in Functional Component
-  By using useReducer hook, we can implement forceUpdate to re-render whenever resize event happens.
-feature_image: "https://images.unsplash.com/photo-1590595906931-81f04f0ccebb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
-image: "https://images.unsplash.com/photo-1590595906931-81f04f0ccebb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
+  ## Array, slide, map, struct
+  Basic consepts of Go, Array, slide, map, struct.
+feature_image: "https://media.vlpt.us/images/meekukin/post/62dfb35f-b1ae-4c0f-b0c6-0e2cc75c4e2a/Golang.png"
+image: "https://media.vlpt.us/images/meekukin/post/62dfb35f-b1ae-4c0f-b0c6-0e2cc75c4e2a/Golang.png"
 ---
 
-Go
+Today I learned about array, slide, map and struct of Go.
