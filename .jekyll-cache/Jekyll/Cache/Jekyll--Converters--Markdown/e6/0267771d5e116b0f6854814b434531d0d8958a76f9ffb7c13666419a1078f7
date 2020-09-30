@@ -1,0 +1,105 @@
+I"<p>React Native에서 아이콘(Icon)을 사용하는 방법은 여러가지가 있겠지만, <strong>react-native-vector-icons를 사용하면 Material Icons, Font Awesome, Ionicons 등 다양한 라이브러리를 한번에 사용할 수 있기에, 이 라이브러리를 추천</strong>하고 싶다. 사용법도 간단하다.</p>
+
+<p><strong>TypeScript와 함께 react-native-vector-icons 사용하는 방법</strong>을 알아보자.</p>
+
+<h2 id="지원하는-아이콘">지원하는 아이콘</h2>
+<ul>
+  <li><strong>AntDesign</strong> by AntFinance (297 icons)</li>
+  <li><strong>Entypo</strong> by Daniel Bruce (411 icons)</li>
+  <li><strong>EvilIcons</strong> by Alexander Madyankin &amp; Roman Shamin (v1.10.1, 70 icons)</li>
+  <li><strong>Feather</strong> by Cole Bemis &amp; Contributors (v4.21.0, 279 icons)</li>
+  <li><strong>FontAwesome</strong> by Dave Gandy (v4.7.0, 675 icons)</li>
+  <li><strong>FontAwesome</strong> 5 by Fonticons, Inc. (v5.7.0, 1500 (free) 5082 (pro) icons)</li>
+  <li><strong>Fontisto</strong> by Kenan Gündoğan (v3.0.4, 615 icons)</li>
+  <li><strong>Foundation</strong> by ZURB, Inc. (v3.0, 283 icons)</li>
+  <li><strong>Ionicons</strong> by Ben Sperry (v4.2.4, 696 icons)</li>
+  <li><strong>MaterialIcons</strong> by Google, Inc. (v3.0.1, 932 icons)</li>
+  <li><strong>MaterialCommunityIcons</strong> by MaterialDesignIcons.com (v4.0.96, 4416 icons)</li>
+  <li><strong>Octicons</strong> by Github, Inc. (v8.4.1, 184 icons)</li>
+  <li><strong>Zocial</strong> by Sam Collins (v1.0, 100 icons)</li>
+  <li><strong>SimpleLineIcons</strong> by Sabbir &amp; Contributors (v2.4.1, 189 icons)</li>
+</ul>
+
+<p>이처럼 다양한 아이콘들을 지원하니 필요한 아이콘을 골라서 사용하기만 하면 된다!</p>
+
+<h2 id="설치-환경-안내">설치 환경 안내</h2>
+<p>이 블로그는 다음의 환경을 기반으로 씌여졌다.
+환경이 다르다고 꼭 에러가 발생하는 것은 아니다. 혹시라도 문제가 생길 경우 참고하자.
+|            Dependency            | Version  |
+| :——————————: | :——: |
+|           react-native           |  0.61.2  |
+|       @types/react-native        | ^0.60.22 |
+|    react-native-vector-icons     |  ^6.6.0  |
+| @types/react-native-vector-icons |  ^6.4.4  |</p>
+
+<h2 id="설치">설치</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add react-native-vector-icons
+yarn add <span class="nt">--dev</span> @types/react-native-vector-icons
+</code></pre></div></div>
+<p>@types/react-native-vector-icons는 타입 설정을 위해 필요하다. 즉, dev 환경에서만 사용하므로 –dev 플래그를 붙여 설치한다.</p>
+
+<p><strong>이제 iOS와 Android에서 사용할 수 있도록 약간의 추가작업을 진행해야 한다.</strong></p>
+
+<h2 id="ios">iOS</h2>
+<p>여기서는 CocoaPods를 사용해 설치하는 것만 살펴본다.
+React Native 0.60.0 이상의 버전이라면 CocoaPods를 사용하는 것이 일반적이다.</p>
+
+<p>수동 설치와 <code class="language-plaintext highlighter-rouge">react-native link</code>를 활용한 설치는 <a href="https://github.com/oblador/react-native-vector-icons">라이브러리의 도큐먼테이션</a>을 참고하자.</p>
+<h4 id="podfile">Podfile</h4>
+
+<pre><code class="language-podfile">pod 'RNVectorIcons', :path =&gt; '../node_modules/react-native-vector-icons'
+
+</code></pre>
+
+<p>Podfile에 위 코드를 추가하였으면 설치 프로세스를 진행하자.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>ios <span class="o">&amp;&amp;</span> pod <span class="nb">install</span> <span class="o">&amp;&amp;</span> cd..
+</code></pre></div></div>
+
+<h3 id="infoplist">Info.plist</h3>
+<p>Info.plist를 열고 “Fonts provided by application”을 추가한다.
+이후 사진처럼 item으로 필요한 파일을 추가한다.</p>
+
+<p><img src="https://github.com/ChaeWonKong/image-resource/blob/master/rn-vector-icons1.png?raw=true" width="100%" /></p>
+
+<h2 id="android">Android</h2>
+
+<h3 id="androidappbuildgradle">android/app/build.gradle</h3>
+
+<p>다음을 추가한다.</p>
+
+<div class="language-gradle highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">apply</span> <span class="nl">from:</span> <span class="s2">"../../node_modules/react-native-vector-icons/fonts.gradle"</span>
+</code></pre></div></div>
+
+<p>안드로이드에서는 이외의 설정이 필요하지 않다.</p>
+
+<h2 id="사용">사용</h2>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Icon</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-vector-icons/dist/Ionicons</span><span class="dl">'</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span><span class="p">(</span>
+  <span class="p">&lt;</span><span class="nc">View</span><span class="p">&gt;</span>
+  	<span class="p">&lt;</span><span class="nc">Text</span><span class="p">&gt;</span>
+    	<span class="p">&lt;</span><span class="nc">Icon</span> <span class="na">name</span><span class="p">=</span><span class="s">"rocket"</span> <span class="na">size</span><span class="p">=</span><span class="si">{</span><span class="mi">30</span><span class="si">}</span> <span class="na">color</span><span class="p">=</span><span class="s">"#900"</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>  
+  <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위 사용 예 처럼 <strong>Icon 컴포넌트는 반드시 Text 컴포넌트 내에서 사용해야</strong> 한다.</p>
+
+<p><strong>name</strong>: <a href="https://oblador.github.io/react-native-vector-icons/">아이콘 검색 사이트</a> 에서 필요한 아이콘을 검색하고 이름을 복사해 넣으면 된다.
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/rn-vector-icons2.png?raw=true" width="100%" /></p>
+
+<p><strong>size</strong>: 사용할 아이콘의 사이즈를 입력한다.</p>
+
+<p><strong>color</strong>: 사용할 아이콘의 컬러를 입력한다.</p>
+
+<h2 id="참고자료">참고자료</h2>
+<ul>
+  <li><a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a></li>
+</ul>
+:ET

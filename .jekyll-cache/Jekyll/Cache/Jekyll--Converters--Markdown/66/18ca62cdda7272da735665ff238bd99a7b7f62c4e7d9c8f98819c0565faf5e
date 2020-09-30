@@ -1,0 +1,186 @@
+I"RU<hr />
+<h3 id="table-of-contents">Table Of Contents</h3>
+<ol>
+  <li><strong>Procedural Programming</strong><br /></li>
+  <li><strong>Object-oriented Programming</strong><br />
+   2.1 Modeling Objects<br />
+   2.2 Inheritance</li>
+</ol>
+
+<p><br />
+OOP is like a huge flame that striked programmer society. Nowadays computer engineer that couldn’t show the concepts and benefits of OOP is considered as disqualified. Then, what OOP exactly means and what benefits OOP offer? This basics of OOP is the main topic of today.</p>
+
+<h2 id="1-procedural-programming">1. Procedural Programming</h2>
+<p>A long time ago in a galaxy far, far away, there was the computer. Since computer has been invented, making softwares to run the huge, ugly thing was our matter - software engineers’ matter.</p>
+
+<p><strong>Before Procedural Programming concept, codes were written line by line, conducted line by line.</strong> As simple as that. Yet, the softwares getting complicated as well as logics and codes beneath it. On certain point, people realized that this won’t work. So, they devise <strong>new paradigm in order to inhance efficiency and readability of codes.</strong> The Birth of <strong>procedures</strong>.</p>
+
+<p>Procedures, a.k.a sub-routines, methods, or functions, are the key element of procedural programming. Unlike codes line by line, <strong>functions are used in procedural programming in order to improve modularity and maintenance</strong>.</p>
+
+<p>Functions are effective. One <strong>same function can be executed as many times as needed</strong>, without writing whole function again.</p>
+
+<p>Just look:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># get sum of given array without function/method
+</span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+  <span class="n">result</span> <span class="o">+=</span> <span class="n">el</span>
+
+
+<span class="c1"># Another sum of array
+</span><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
+  <span class="n">result</span> <span class="o">+=</span> <span class="n">el</span>
+</code></pre></div></div>
+
+<p>Calculating sum of whole array is quite common process dealing with data. Without using function(or PROCEDURE), developers would have to repeat the whole code again and again whit tiny little modification.</p>
+
+<p>In procedural programming, however, developers could just improvise a function and use it instead of repeating the whole codes again and again.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">sum_arr</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+
+  <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">+=</span> <span class="n">el</span>
+
+  <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="n">sum_arr</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># 15
+</span><span class="n">sum_arr</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1"># 13
+</span></code></pre></div></div>
+
+<p>This is how procedural programming works. <strong>Making functions, making modules.</strong> You can make specific functions and modules and call them as many times you want. Even you can make it independent file and import it.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Import module outside of the file
+</span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># generates random float number between 0 and 1
+</span><span class="n">random</span><span class="p">.</span><span class="n">random</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>One Last Thing:
+<strong>Procedural programming paradigm separates implementation from interface.</strong> One who need to use the sumArr() function doesn’t have to know about codes inside the function. One only need to know the interface: sumArr() function gets array as a parameter and returns sum results of the array. Only input and output matters. One doesn’t have to know details or how the function works internally.</p>
+
+<p><strong>This makes much easier when doing co-ops with other programmers</strong>. Sometimes reading codes that generated by other programmer line by line could be pain in the ass. In procedural programming, you don’t have to, only if you understand the interface.</p>
+
+<h2 id="2-object-oriented-programming">2. Object-oriented Programming</h2>
+<h3 id="21-modeling-objects">2.1 Modeling Objects</h3>
+<p><strong>Object-oriented paradigm</strong> starts from the question <strong>‘how objects in real worlds could be modeled?’</strong> whereas <strong>procedural paradigm</strong> has been spawned from <strong>‘what does this program do exactly?’.</strong></p>
+
+<p>Think about you have to describe a car. You can ride it, you can drive it, you can fuel it, it moves, it has many wheels. If you have to store data and methods related to cars, you might want to gather them and make them as a group, because group of things are much easier to manipulate and manage.</p>
+
+<p>Then, what’s for? Do we really have to make a group of data and methods for cars in practical programming world? Maybe not. But, consider this: membership in a website, like Facebook. Members in Facebook can write and read articles. They have related informations email, age, college, friends and so on. Facebook also need to remember what posts you liked and what posts your friends liked.</p>
+
+<p>Too much informations and too much functions. In modern computer science, <strong>data is all that matters.</strong> Usually data is the culprit that makes modern application complicated. <strong>Procedural programming is not enough. That does not enhance data flow or managing data.</strong></p>
+
+<p>Thus, let there be light, or, let there be OOP. With OOP, <strong>you can make groups with functions and data that are related.</strong> If you are a member of Facebook, you have name, age and school you graduate from. You have a huge list of friends. You can follow or unfollow person. Now you can make these functions and data into class and instance.
+(Let’s not think about what class and instance means; just look into it. Feel it.)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Member</span><span class="p">:</span>
+  
+  <span class="c1"># Constructor: initializes instance properties.
+</span>  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">school</span><span class="p">,</span> <span class="n">friends</span><span class="p">):</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">school</span> <span class="o">=</span> <span class="n">school</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">friends</span> <span class="o">=</span> <span class="n">friends</span>
+  
+  <span class="c1"># Method that makes friend
+</span>  <span class="k">def</span> <span class="nf">friend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">member</span><span class="p">):</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">friends</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
+  
+  <span class="c1"># Method that deletes friend
+</span>  <span class="k">def</span> <span class="nf">unfriend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">friend</span><span class="p">):</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">friends</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">friend</span><span class="p">)</span>
+  
+  <span class="c1"># Method that shows friends
+</span>  <span class="k">def</span> <span class="nf">show_friends</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Friends of {}: {}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="s">", "</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">friends</span><span class="p">)))</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span> <span class="c1"># Execution block.
+</span>
+  <span class="c1"># Create instance called harry with Member class
+</span>  <span class="n">harry</span> <span class="o">=</span> <span class="n">Member</span><span class="p">(</span><span class="s">"Harry"</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="s">"Hogwart"</span><span class="p">,</span> <span class="p">[</span><span class="s">"Hermione"</span><span class="p">,</span> <span class="s">"Ron"</span><span class="p">,</span> <span class="s">"Jinny"</span><span class="p">])</span>
+
+  <span class="c1"># Let's see who are the friends of harry's
+</span>  <span class="n">harry</span><span class="p">.</span><span class="n">show_friends</span><span class="p">()</span> <span class="c1"># Friends of Harry: Hermione, Ron, Jinny
+</span>
+  <span class="c1"># Add Hagrid as a friends (Follow Hagrid)
+</span>  <span class="n">harry</span><span class="p">.</span><span class="n">follow</span><span class="p">(</span><span class="s">"Hagrid"</span><span class="p">)</span>
+  <span class="n">harry</span><span class="p">.</span><span class="n">show_friends</span><span class="p">()</span> <span class="c1"># Friends of Harry: Hermione, Ron, Jinny, Hagrid
+</span></code></pre></div></div>
+
+<p>Like functions can be repeatedly used, class can. <strong>Class is a movable-type printing press and instance is the Bible printed from it.</strong> With printing press, you can print as many Bibles you want. You can print with green color, blue color, red color and any other colors that you want.</p>
+
+<p>In the previous example, you can also make draco or albus or voldemort as an instance. With the printing press called ‘Member’, you can create as many instances or books as you want.</p>
+
+<p>The important thing is: <strong>each instance may have slightly different data</strong>. Draco may have different friends than Harry. Voldemort may be older than Harry. Some members are not graduated from Hogwart. Yet, they <strong>share the same structure of data and functions.</strong> They have their own name, age, school, and friends. They have methods(functions inside class) like follow(), unfollow(), show_friends().</p>
+
+<h3 id="22-inheritance">2.2 Inheritance</h3>
+<p>If class B inherits class A, B is a sub-kind of A. Consider Vehicle class and Car class. Car is a kind of vehicles. <strong>If there should be other classes like Train and Ship, maybe it would be better to define super class (or parent class) that shares common properties (i.e. max_passenger, max_speed) and methods (i.e. give_ride, drive).</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Vehicle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">passingers</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">passingers</span> <span class="o">=</span> <span class="n">passingers</span>
+    
+    <span class="k">def</span> <span class="nf">give_ride</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">passingers</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Car</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">passingers</span><span class="p">,</span> <span class="n">driver</span><span class="p">,</span> <span class="n">gear</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="n">passingers</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">driver</span> <span class="o">=</span> <span class="n">driver</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">gear</span> <span class="o">=</span> <span class="n">gear</span>
+
+    <span class="k">def</span> <span class="nf">change_gear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newGear</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">gear</span> <span class="o">=</span> <span class="n">newGear</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Gear Changed: {}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">gear</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="k">return</span> <span class="s">"driver: {} passingers: {} gear: {}"</span>\
+             <span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">driver</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">passingers</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">gear</span><span class="p">)</span>
+    
+
+<span class="k">class</span> <span class="nc">Airplane</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">passingers</span><span class="p">,</span> <span class="n">pilots</span><span class="p">,</span> <span class="n">crews</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">passingers</span> <span class="o">=</span> <span class="n">passingers</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">pilots</span> <span class="o">=</span> <span class="n">pilots</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">crews</span> <span class="o">=</span> <span class="n">crews</span>
+    
+    <span class="k">def</span> <span class="nf">take_off</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="s">"Ladies and Gentlemen, "</span> <span class="o">+</span> 
+                    <span class="s">"our plane is about to take off. "</span> <span class="o">+</span> 
+                    <span class="s">"Please fasten your seat belt."</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">"pilots: {}, passengers: {}, crews: {}"</span>\
+            <span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">pilots</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">passingers</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">crews</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="p">([</span><span class="s">"Steve"</span><span class="p">],</span> <span class="s">"Leon"</span><span class="p">,</span> <span class="s">"P"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">car</span><span class="p">)</span>
+    <span class="n">car</span><span class="p">.</span><span class="n">give_ride</span><span class="p">([</span><span class="s">"Kay"</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">car</span><span class="p">)</span>
+    <span class="n">car</span><span class="p">.</span><span class="n">change_gear</span><span class="p">(</span><span class="s">"D"</span><span class="p">)</span>
+
+    <span class="n">airplane</span> <span class="o">=</span> <span class="n">Airplane</span><span class="p">(</span>\
+    <span class="p">[</span><span class="s">"Homer"</span><span class="p">,</span> <span class="s">"Marge"</span><span class="p">,</span> <span class="s">"Bart"</span><span class="p">,</span> <span class="s">"Lisa"</span><span class="p">,</span> <span class="s">"Maggie"</span><span class="p">],</span>\
+     <span class="p">[</span><span class="s">"Luke"</span><span class="p">,</span> <span class="s">"Han"</span><span class="p">],</span> <span class="p">[</span><span class="s">"Anakin"</span><span class="p">,</span> <span class="s">"Yoda"</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">airplane</span><span class="p">)</span>
+    <span class="n">airplane</span><span class="p">.</span><span class="n">take_off</span><span class="p">()</span>
+</code></pre></div></div>
+<p>This example shows some basic concepts of inheritance. <strong>Both Car and Airplane class inherited Vehicle class.</strong> They both have ‘passengers’ prop and they both can give ride by ‘give_ride()’ method.</p>
+
+<p>However those Car class and Airplane class are slightly different. <strong>The ‘car’ instance from Car class has props like ‘driver’ and ‘gear’, wheareas the ‘airplane’ instance from Airplane class has ‘pilots’ and ‘crews’. ‘car’ has method ‘change_gear()’ whereas ‘airplane’ has method ‘take_off()’.</strong></p>
+:ET

@@ -1,0 +1,72 @@
+I"b<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Environments</th>
+      <th style="text-align: center">Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">react-native</td>
+      <td style="text-align: center">0.60.4</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Xcode</td>
+      <td style="text-align: center">11.1</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>After updating Xcode to Version 11.1 (11A1027) I encountered ‘iPhone X’ not found error when running <code class="language-plaintext highlighter-rouge">react-native run-ios</code>.
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/iphonex1.png?raw=true" width="100%" /></p>
+
+<pre><code class="language-cmd">$ react-native run-ios
+
+&gt; error Could not find "iPhone X" simulator. Run CLI with --verbose flag for more details.
+</code></pre>
+
+<p>It’s mainly because <strong>new Xcode version does not have ‘iPhone X’ anymore.</strong>
+Actually iPhone model name has been slightly changed. ‘iPhone Xs’ Became ‘iPhone 11 Pro’. Some of other recent models has simmilar changes.</p>
+
+<h2 id="possible-solutions">Possible Solutions</h2>
+<h3 id="specifying-device">Specifying Device</h3>
+<p>When running <code class="language-plaintext highlighter-rouge">react-native run-ios</code> command, you can specify device that exists.</p>
+
+<pre><code class="language-cmd">react-native run-ios --simulator="iPhone 11 Pro"
+</code></pre>
+
+<p>It is the most simpleast solution, yet it’s quite annoying, <strong>since you have to type longer command.</strong></p>
+
+<h3 id="change-default-virtual-device">Change Default Virtual Device</h3>
+<p>You can change default running virtual device in node_modules.
+Open up “/node_modules/@react-native-community/cli-platform-ios/build/commands/runIOS/index.js” in your text editor.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+    <span class="p">...</span>
+<span class="nx">options</span><span class="p">:</span> <span class="p">[{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">--simulator [string]</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Explicitly set simulator to use. Optionally include iOS version between</span><span class="dl">'</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">parenthesis at the end to match an exact version: "iPhone 6 (10.0)"</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">default</span><span class="p">:</span> <span class="dl">'</span><span class="s1">iPhone X</span><span class="dl">'</span>
+  <span class="p">},</span>
+          <span class="p">...</span>
+          <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>See “default”? Just change it to something like “iPhone 11 Pro” or else.</p>
+
+<p>The problem is, <strong>whenever you install node_modules again, it goes back to “iPhone X”.</strong></p>
+
+<h2 id="recommanded-solution">Recommanded Solution</h2>
+<p>It is kind a tricky solution but easy and certain. Just add “iPhone X” to your Xcode.
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/iphonex2.png?raw=true" width="100%" />
+Press Button marked as in image above.
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/iphonex3.png?raw=true" width="100%" />
+Then, press plus button.
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/iphonex4.png?raw=true" width="100%" />
+Add “iPhone X”.</p>
+
+<h2 id="references">References</h2>
+<ul>
+  <li><a href="https://stackoverflow.com/questions/54504076/react-native-run-ios-returns-error-could-not-find-iphone-x-simulator">StackOverflow</a></li>
+</ul>
+:ET

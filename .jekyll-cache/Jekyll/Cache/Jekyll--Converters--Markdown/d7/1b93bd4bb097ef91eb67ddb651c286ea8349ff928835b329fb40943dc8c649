@@ -1,0 +1,67 @@
+I"v<p>When I tried to implement Authentication in my web app, I was advised to use JWT based access token and refresh token.</p>
+
+<p>I searched about refresh token and I encountered these two questions:<br />
+<strong>Why should I use refresh token? <br />
+Why is it safer?</strong></p>
+
+<p>I’m not sure the answer that I found is sufficient, yet I am pretty convinced the necessity of refresh token.</p>
+
+<h2 id="access-token--refresh-token">Access Token &amp; Refresh Token</h2>
+<p>The purpose of access token is to maintain session(keep authenticated), to fetch and modify protected data in server/DB.</p>
+
+<ul>
+  <li>When the user is authenticated, the server issues access token and refresh token.</li>
+  <li>access token is composed of JWT, and does not need to be stored in the server(stateless).</li>
+  <li>When the user tries to access to auth-required resources, access token must be presented.</li>
+  <li>When the access token has expired, the server responds with error, and the client sends refresh token to refresh access token.</li>
+  <li>Access token has short life than refresh token.
+For instance, access token could have 15 minutes of lifetime whereas refresh token could have 2 weeks of lifetime.
+Generally 2 weeks to 1 month is generally recommended lifetime for refresh token.</li>
+</ul>
+
+<h2 id="necessity-of-refresh-token">Necessity of Refresh Token</h2>
+<p>Consider the case that there is no refresh token:</p>
+<ol>
+  <li>If the lifespan of access token is short enough, the user need to authenticate quite often(depends on the lifespan of access token).</li>
+  <li>If the lifespan of access token is long enough, the vulnerability agumented proportionally to the max age of the access token.</li>
+</ol>
+
+<p>They say it is safer to have short lifespan of access token with long lifespan of refresh token.
+But why? Why is it safer? Does refresh token actually have any difference?</p>
+
+<p>If the refresh token is leaked, it may be used to issue new access tokens until it exires or blocked.
+Most of the advices recommends to store refresh token in a secure location/storage, yet the problem is, <strong>there is no secure storage in the browser.</strong> Local storage, session storage, cookie… those are all that web front-end developers have as options, yet neither of them are being considered as secure storage.</p>
+
+<p>In this point of view, <strong>refresh token may have no difference, compared to the access token that have same long lifespan just like the refresh token.</strong></p>
+
+<p>So, why do we really need to implement refresh token?</p>
+
+<h2 id="enhancing-security-with-refresh-token">Enhancing Security with Refresh Token</h2>
+<p>Refresh Token itself does not guarantee security.
+Only when proper security strategy are adopted, refresh token enhances safety.</p>
+
+<p>On way, could be storing refresh token in secure server/DB.
+This requires disk I/O and server-side resources.</p>
+
+<p><strong>If the auth server stores refresh token with certain user data(geolocation, IP, device, browser etc), server could restrict malicious atempt to refresh the access token.</strong></p>
+
+<p>For instance, <strong>if you try to refresh your access token in different state or country, the server could block your atempt.</strong></p>
+
+<p>In this case, the server need to store certain user information accompanied with the refresh token.
+It costs some. Note that only when the access token expires, the token refresh process is initiated.</p>
+
+<p>It is relatively uncommon compared to access token usage.</p>
+
+<p>So, when the user has been authenticated, the user could access to the protected data by sending access token, and since access token does not requires disk I/O, it is relatively faster.</p>
+
+<p>Every 15 minutes or so, when the access token expires, the user may need to wait a little longer to refresh the access token and access to the protected data; yet it’s much safer, since the refresh token strategy ensures safety with several other data to verify.</p>
+
+<h2 id="reference">Reference</h2>
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc6750#section-5">The OAuth 2.0 Authorization Framework: Bearer Token Usage</a></li>
+  <li><a href="https://auth0.com/learn/refresh-tokens/">Understanding Refresh Tokens</a></li>
+  <li><a href="https://auth0.com/blog/refresh-tokens-what-are-they-and-when-to-use-them/">Refresh Tokens: When to Use Them and How They Interact with JWTs</a></li>
+  <li><a href="https://blog.ull.im/engineering/2019/02/07/jwt-strategy.html">Refresh Token과 Sliding Sessions를 활용한 JWT의 보안 전략</a></li>
+  <li><a href="https://stackoverflow.com/questions/55486341/how-to-secure-a-refresh-token">How to secure a refresh token?</a></li>
+</ul>
+:ET

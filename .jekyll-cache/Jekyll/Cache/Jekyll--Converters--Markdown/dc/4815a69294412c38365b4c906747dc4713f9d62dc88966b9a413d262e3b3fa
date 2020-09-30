@@ -1,0 +1,87 @@
+I"�+
+<p>SafeAreaView는 iOS 11버전 이후부터 사용이 가능하며 아이폰 Xs 처럼 노치 등이 있는 경우 자식 컴포넌트에 padding을 적용하여 컨텐츠가 잘려나가지 않게 해준다. 디바이스별 물리적인 화면의 제한을 고려하여 어떠한 경우에도 컨텐츠가 잘려나가지 않고 안전하게 보여주도록 도와준다.</p>
+
+<h2 id="react-native---safeareaview의-top과-bottom-컬러-다르게-설정하기">React Native - SafeAreaView의 top과 bottom 컬러 다르게 설정하기</h2>
+
+<p>앱을 개발하다 보면 SafeAreaView를 이용함으로써 잘려나가는 top 부분의 padding과 bottom 부분의 padding에 서로 다른 색깔(컬러)을 적용하고 싶을 때가 있다. 이런 경우 어떻게 대응하는지 알아보자.</p>
+
+<h3 id="요구사항">요구사항</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>react &gt;= 16.2.0
+</code></pre></div></div>
+
+<p>우리는 Fragment를 React에서 import해 이 이슈를 해결할 것이다. Fragment를 사용하기 위해서는 16.2.0 이상의 React 버전을 사용해야 한다.</p>
+
+<p>기본적으로 SafeAreaView를 이용한다면 다음과 같을 것이다:</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">SafeAreaView</span><span class="p">,</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">Text</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-native</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">SafeAreaView</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">View</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#25365d</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">Text</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">fontSize</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#fff</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>Text<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">SafeAreaView</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이미지로 결과물을 보면 아래와 같다:</p>
+
+<p><img src="https://github.com/ChaeWonKong/image-resource/blob/master/safearea1.png?raw=true" height="450px" /></p>
+
+<p>우리는 Fragment를 React에서 가져와 루트 컴포넌트의 SafeAreaView 컴포넌트를 감쌀 것이다. 이를 통해서 상단과 하단의 패딩(padding)에 서로 다른 색을 적용할 것이다.</p>
+
+<p>코드는 다음과 같다:</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">Fragment</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">SafeAreaView</span><span class="p">,</span> <span class="nx">Platform</span><span class="p">,</span> <span class="nx">View</span><span class="p">,</span> <span class="nx">StatusBar</span><span class="p">,</span> <span class="nx">Text</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-native</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">OS</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">ios</span><span class="dl">"</span><span class="p">)</span>
+      <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">Fragment</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">SafeAreaView</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">flex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">red</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span> <span class="p">/&gt;</span>
+          <span class="p">&lt;</span><span class="nc">StatusBar</span> <span class="na">barStyle</span><span class="p">=</span><span class="s">"light-content"</span> <span class="p">/&gt;</span>
+          <span class="p">&lt;</span><span class="nc">SafeAreaView</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">blue</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">View</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#25365d</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nc">Text</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">fontSize</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#fff</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>Text<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nc">SafeAreaView</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">Fragment</span><span class="p">&gt;</span>
+      <span class="p">);</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">View</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#25365d</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">Text</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">fontSize</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#fff</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>Text<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+      <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>StatusBar 컴포넌트는 아이폰 상단의 현재시각, 배터리, 네트워크 연결 상태 등을 보여주는 얇은 띄 형태의 바를 의미한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>barStyle="light-content"
+</code></pre></div></div>
+
+<p>우리는 그 내부의 텍스트 색상을 흰 색으로 하기 위해 위 코드를 사용한다.</p>
+
+<p>결과물을 살펴보자:</p>
+
+<p><img src="https://github.com/ChaeWonKong/image-resource/blob/master/safearea2.png?raw=true" height="450px" /></p>
+
+<h2 id="결론">결론</h2>
+
+<p>Fragment를 React에서 가져와 사용함으로써 두개의 SafeAreaView를 선언하고 각기 다른 padding 색상을 적용할 수 있었다. 물론, 다른 전반적인 UI나 로직에는 변화가 없이 말이다.</p>
+
+<h2 id="참고자료">참고자료</h2>
+
+<p><a href="https://medium.com/reactbrasil/react-native-set-different-colors-on-top-and-bottom-in-safeareaview-component-f008823483f3">React Native: Set different colors on Top and Bottom in SafeAreaView component</a></p>
+
+:ET

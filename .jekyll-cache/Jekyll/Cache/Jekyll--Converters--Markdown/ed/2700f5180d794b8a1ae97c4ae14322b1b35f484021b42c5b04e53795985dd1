@@ -1,0 +1,44 @@
+I"�	<p>Sometimes it is necessary to find out device’s unique identifier. 
+There’s a handy library that helps you to do that.</p>
+
+<p><strong><a href="https://github.com/react-native-community/react-native-device-info">react-native-device-info</a></strong> will do that for you.</p>
+
+<h2 id="installation">Installation</h2>
+<p>If you are using React Native &gt;= 0.60:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add react-native-device-info
+cd ios &amp;&amp; pod install &amp;&amp; cd ..
+</code></pre></div></div>
+
+<p>The code above will automatically links the library to your project.
+There’s no need to link it, or manually add codes to Podfile.</p>
+
+<h2 id="introduction">Introduction</h2>
+<p>This library surely gives a lot of handly methods to get infos from devices. Let’s see some of it.</p>
+
+<ul>
+  <li>getUniqueId(): It gives you unique identifier of each device both in Android and iOS.</li>
+  <li>getBatteryLevel(): It returns battery level of the device.</li>
+  <li>getDeviceId(): It returns something like this: “iPhone7, 2” or “goldfish” for Android</li>
+  <li>getIpAddress(): It returns IP address.</li>
+</ul>
+
+<h2 id="usage">Usage</h2>
+
+<p>You can use DeviceInfo.getUniqueId() to handle device’s unique id.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">DeviceInfo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-device-info</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getUniqueId</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">uniqueId</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">uniqueId</span><span class="p">)</span>
+  <span class="c1">// iOS: "FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F9"</span>
+  <span class="c1">// Android: "dd96dec43fb81c97"</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Note that “getUniqueId()” returns a promise.</p>
+
+<h2 id="reference">Reference</h2>
+<ul>
+  <li><a href="https://github.com/react-native-community/react-native-device-info">react-native-device-info</a></li>
+</ul>
+:ET

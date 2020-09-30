@@ -1,0 +1,44 @@
+I"�
+<p>종종 아이폰 및 안드로이드 폰에서 각 폰별로 고유한 ID 값을 알아야 하는 경우가 있다.
+react-native-device-info 라는 라이브러리를 사용하면 쉽게 이 일을 처리할 수 있다.</p>
+
+<p><strong><a href="https://github.com/react-native-community/react-native-device-info">react-native-device-info</a></strong></p>
+
+<h2 id="설치">설치</h2>
+<p>React Native 버전 0.60 이상에서는 간단하게 설치 가능하다:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add react-native-device-info
+cd ios &amp;&amp; pod install &amp;&amp; cd ..
+</code></pre></div></div>
+
+<p>위 코드는 자동으로 라이브러리를 링크해준다. 따로 수동(‘manual’)으로 Podfil에 코드를 추가하거나 link할 필요가 없다.</p>
+
+<h2 id="소개">소개</h2>
+<p>react-native-device-info는 우리가 사용하려는 getUniqueId() 메소드 말고도 많은 유용한 메소드들을 제공한다.</p>
+
+<ul>
+  <li>getUniqueId(): 기기별로 고유한 ID 값을 리턴한다.</li>
+  <li>getBatteryLevel(): 배터리가 얼마나 남았는지 알려준다.</li>
+  <li>getDeviceId(): 이것은 사실 ID라고 하기는 애매하다. “iPhone7, 2” 혹은 안드로이드의 경우 “goldfish” 와 같은 형태로 리턴된다.</li>
+  <li>getIpAddress(): IP 주소를 알 수 있다.</li>
+</ul>
+
+<h2 id="사용법">사용법</h2>
+
+<p>DeviceInfo.getUniqueId()를 사용하면 우리가 원하는 기기별 고유한 ID 값을 알 수 있다.</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">DeviceInfo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-native-device-info</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="nx">DeviceInfo</span><span class="p">.</span><span class="nx">getUniqueId</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">uniqueId</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">uniqueId</span><span class="p">)</span>
+  <span class="c1">// iOS: "FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F9"</span>
+  <span class="c1">// Android: "dd96dec43fb81c97"</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>“getUniqueId()”는 Promise를 리턴한다.</p>
+
+<h2 id="참고자료">참고자료</h2>
+<ul>
+  <li><a href="https://github.com/react-native-community/react-native-device-info">react-native-device-info</a></li>
+</ul>
+:ET

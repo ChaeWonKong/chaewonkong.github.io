@@ -1,0 +1,121 @@
+I"�0<blockquote>
+  <h2 id="목차-">목차 <br /></h2>
+  <p><strong>1. 클로저의 개념</strong><br />
+<strong>2. 클로저는 왜 사용하는가?</strong><br />
+2.1 ES6의 등장<br />
+<strong>3. 클로저는 언제 사용하는가?</strong><br />
+<strong>4. 클로저의 단점</strong><br /></p>
+</blockquote>
+
+<p><br /><br /></p>
+<h2 id="1-클로저의-개념">1. 클로저의 개념</h2>
+<p>클로저란 내부함수가 외부함수의 맥락(context: 매개변수, 변수 등)에 접근할 수 있는 경우를 의미한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">outter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Coding</span><span class="dl">"</span><span class="p">;</span>
+    <span class="kd">function</span> <span class="nx">inner</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">inner</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위 코드를 살펴보자. inner함수는 함수 내부에 title이라는 지역변수가 존재하지 않는다면, inner함수를 포함하는 바깥쪽 함수에서 title이라는 변수를 찾는다.</p>
+
+<p>한편, 외부함수가 더 이상 사용되지 않는 경우에도 내부함수를 통해 외부함수에 접근할 수 있게 된다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">outter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Coding</span><span class="dl">"</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">inner</span> <span class="o">=</span> <span class="nx">outter</span><span class="p">();</span>
+<span class="nx">inner</span><span class="p">();</span>
+<span class="c1">// Coding</span>
+</code></pre></div></div>
+<p>inner라는 변수는 outter함수 외부에서 정의되었고, outter함수의 반환값이 담겼다. 이미 outter는 실행이 되고, return된 함수가 inner에 담겼을 뿐인 것이다. 그러나, inner를 함수로써 호출하게 되면 outter함수의 스코프에서 선언한 title이라는 상수에 접근할 수 있게 된다.</p>
+
+<p>이것이 클로저의 중요한 특징이다.
+<br /><br /></p>
+<h2 id="2-클로저는-왜-사용하는가">2. 클로저는 왜 사용하는가?</h2>
+<p>클로저를 사용하게 되면 구조는 좀 더 복잡해지지만, 그 구조는 안전해진다. 클로저를 통해 private variable을 사용하게 되면 복잡한 소프트웨어에서 버그나 오류를 미연에 방지할 수 있다.</p>
+
+<p>다음 예제를 살펴보자.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">factory_movie</span><span class="p">(</span><span class="nx">title</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">get_title</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">title</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="na">set_title</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">_title</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">_title</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">String</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">title</span> <span class="o">=</span> <span class="nx">_title</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="nx">ghost</span> <span class="o">=</span> <span class="nx">factory_movie</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ghost in the shell</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">matrix</span> <span class="o">=</span> <span class="nx">factory_movie</span><span class="p">(</span><span class="dl">"</span><span class="s2">Matrix</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">ghost</span><span class="p">.</span><span class="nx">set_title</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello ghost</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ghost</span><span class="p">.</span><span class="nx">get_title</span><span class="p">());</span>
+</code></pre></div></div>
+<p>factory_movie라는 함수를 선언해 title을 private variable로써 숨겼다. 이제 private variable인 title은 get_title과 set_title이라는 메소드로만 접근할 수 있다. title을 변경하기 위해서는 반드시 set_title을 이용해야 한다.</p>
+
+<p>여러명이 투입되는 복잡한 소프트웨어의 경우 전역변수로 인해 갖은 문제에 봉착하곤 하게 된다. 개발자의 의도와 다르게 전역변수가 수정되거나 변경될 경우, 버그가 발생하게 된다. 그리고, 복잡성 때문에 어디에서 어떤 문제가 발생했는지 찾고 해결하는 것 또한 결코 작지 않은 일이다.</p>
+
+<p>클로저를 이용해 private variable을 활용하면, 중요한 변수들을 숨겨둠으로써 이런 문제를 미연에 방지할 수 있다.</p>
+
+<h3 id="21-es6의-등장">2.1 ES6의 등장</h3>
+<p>한편, ES6에서는 var외에 const와 let이라는 개념이 도입되었다. let은 변수, const는 상수를 의미하는데, 웬만하면 const를 사용할 것이 권장된다.</p>
+
+<p>ES6가 도입되어 const와 let이 널리 사용되면서 자바스크립트 개발환경은 이전보다 훨씬 안전해졌다. const와 let의 경우 재선언은 원천적으로 봉쇄된다. 즉, 다음은 에러를 발생시킨다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">A</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">B</span><span class="dl">"</span>
+<span class="c1">// 에러</span>
+<span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">B</span><span class="dl">"</span><span class="p">;</span>
+<span class="c1">// 에러</span>
+</code></pre></div></div>
+<p>let으로 선언된 변수의 경우 담는 값은 변경 가능하지만 같은 변수명으로 새로 선언하는 것은 불가능하다.</p>
+
+<p>var로만 변수가 선언되던 시절에 비해 현저히 안전한 개발이 가능해진 것이다.</p>
+
+<p>그러나, 여전히 let은 변수이기에 언제든 다른 값으로 변경될 수 있다. 물론 웬만하면 const를 쓰도록 권장되기에 이런 문제는 어느정도 극복 가능하지만, 경우에 따라서는 어쩔 수 없이 let을 사용해야만 하는 경우들도 많다. 이런 경우, 변수를 안전하게 보관하기 위해 클로저를 사용하면 된다.
+<br /><br /></p>
+<h2 id="3-클로저는-언제-사용하는가">3. 클로저는 언제 사용하는가?</h2>
+<p><strong>(1) private variable 혹은 private property</strong><br />
+자바(JAVA)는 객체의 속성에 대한 직접접근을 막기 위해 private라는 접근제어자를 지원한다. 하지만 자바스크립트는 언어 차원의 접근제어자를 지원하지 않는다. 따라서 이를 개발자가 직접 구현해야 하는데, 클로저를 사용하면 쉽게 구현 가능하다.</p>
+
+<p>위에서 살펴본 set_title, get_title 메서드와 관련된 코드가 그것이다.</p>
+
+<p><strong>(2) 전역변수 선언 없이 전역적으로 사용</strong><br />
+클로저를 이용해 어쩔 수 없이 전역적으로 사용해야 하는 변수를 안전하게 보호할 수 있다.</p>
+
+<p><strong>(3) 싱글톤 패턴</strong><br />
+싱글톤패턴이란 한 어플리케이션에서 한 생성자는 반드시 한 개의 객체만을 생성하는 패턴이다. 자바(JAVA)에서는 생성자를 private로 지정함으로써 구현이 쉬운 편인데 자바스크립트는 이런 기능이 없다. 따라서 클로저를 이용해 구현해야 한다.function getInstance(name, age){</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getInstance</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">obj</span><span class="p">;</span>
+    <span class="kd">function</span> <span class="nx">Human</span><span class="p">(</span><span class="nx">_name</span><span class="p">,</span> <span class="nx">_age</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">_name</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">_age</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Human</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">obj</span><span class="p">;</span>
+    <span class="p">}();</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">getInstance</span><span class="p">(</span><span class="dl">"</span><span class="s2">Leon</span><span class="dl">"</span><span class="p">,</span> <span class="mi">28</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+<span class="c1">// Human {name: "Leon", age: 28}</span>
+</code></pre></div></div>
+<p><br /><br /></p>
+<h2 id="4-클로저의-단점">4. 클로저의 단점</h2>
+<p>클로저는 그 특성상 폐쇄된 스코프 안의 변수가 스코프 종료와 동시에 회수되지 못한다. 스코프 밖에서 언제든지 그 변수를 호출할 가능성이 있기 때문에 자바스크립트는 그 변수를 메모리에 계속해서 저장하게 된다. 즉, 메모리 효율적인 개발 방식은 아니다. 수거되지 않는 특성 때문이다. 따라서 꼭 필요한 경우에만 사용하는 것이 바람직하다.</p>
+:ET

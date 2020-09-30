@@ -1,0 +1,104 @@
+I",5<h2 id="문제">문제</h2>
+<p>n개의 원소로 이루어진 정렬된 배열 arr에 대하여 m개를 뽑는 모든 조합을 배열로 출력하기.</p>
+
+<h2 id="전체-코드">전체 코드</h2>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getAllCombinations</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">combinations</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kd">const</span> <span class="nx">picked</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kd">const</span> <span class="nx">used</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nx">item</span> <span class="k">of</span> <span class="nx">arr</span><span class="p">)</span> <span class="nx">used</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="kd">function</span> <span class="nx">find</span><span class="p">(</span><span class="nx">picked</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">picked</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="nx">m</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">rst</span> <span class="o">=</span> <span class="p">[];</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">of</span> <span class="nx">picked</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">rst</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+      <span class="p">}</span>
+      <span class="nx">combinations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">rst</span><span class="p">);</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">start</span> <span class="o">=</span> <span class="nx">picked</span><span class="p">.</span><span class="nx">length</span> <span class="p">?</span> <span class="nx">picked</span><span class="p">[</span><span class="nx">picked</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">start</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">!==</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">||</span> <span class="nx">used</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+          <span class="nx">picked</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+          <span class="nx">used</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+          <span class="nx">find</span><span class="p">(</span><span class="nx">picked</span><span class="p">);</span>
+          <span class="nx">picked</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+          <span class="nx">used</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="nx">find</span><span class="p">(</span><span class="nx">picked</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">combinations</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="예제-확인">예제 확인</h2>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">m</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getAllCombinations</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">m</span><span class="p">));</span>
+<span class="c1">// [[1, 2, 2], [1, 2, 3], [2, 2, 3]]</span>
+</code></pre></div></div>
+
+<h2 id="풀이">풀이</h2>
+<p>getAllCombination 함수는 배열 arr과 양의정수 m을 매개변수로 받는다. 이를 활용해 arr에서 m개의 조합을 선택하는 모든 경우를 배열로 반환한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">combinations</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">const</span> <span class="nx">picked</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">const</span> <span class="nx">used</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="k">for</span> <span class="p">(</span><span class="nx">item</span> <span class="k">of</span> <span class="nx">arr</span><span class="p">)</span> <span class="nx">used</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+<p>먼저 각 조합들을 담을 배열 combinations를 빈 배열로 선언한다.</p>
+
+<p>이후 picked를 빈 배열로 선언하는데, 이 배열에는 선택한 요소의 인덱스가 담길 것이다.</p>
+
+<p>다음으로 used라는 빈 배열을 선언하고, arr의 길이만큼 used에 0을 요소로 추가한다. used는 arr의 요소 중 같은 요소가 2개 이상일 경우, 중복되는 조합이 거듭 combinations에 추가되는 것을 막기 위해 사용한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">find</span><span class="p">(</span><span class="nx">picked</span><span class="p">)</span> <span class="p">{}</span>
+</code></pre></div></div>
+<p>다음으로는 find라는 함수를 선언하며 매개변수로는 picked를 준다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nx">picked</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="nx">m</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">rst</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">of</span> <span class="nx">picked</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">rst</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="nx">combinations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">rst</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>탈출조건(종료조건)을 추가한다. 만약 m개를 모두 뽑아 picked의 길이가 m과 같아진다면 종료한다.</p>
+
+<p>종료할 때는 rst라는 배열에 picked에 속한 인덱스를 바탕으로 arr의 실제 요소를 담는다. rst가 완성되면 combinations에 담고 return을 통해 함수를 종료한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">else</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">start</span> <span class="o">=</span> <span class="nx">picked</span><span class="p">.</span><span class="nx">length</span> <span class="p">?</span> <span class="nx">picked</span><span class="p">[</span><span class="nx">picked</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">start</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">!==</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">||</span> <span class="nx">used</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+        <span class="nx">picked</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+        <span class="nx">used</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="nx">find</span><span class="p">(</span><span class="nx">picked</span><span class="p">);</span>
+        <span class="nx">picked</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+        <span class="nx">used</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>시작 인덱스를 담기 위해 변수 start를 선언하는데, 만약 picked에 이미 인덱스가 있다면 그 인덱스보다 1 큰 수를, 없다면 0을 start로 선언한다.</p>
+
+<p>for문을 통해 start부터 arr.length-1까지 수 i에 대해 뽑기를 진행한다. 단, if문 조건을 만족하는 경우에 한해 뽑는다.</p>
+
+<p>만약 i가 0, 즉 첫 원소이면 무조건 뽑는다. 혹은 arr[i]와 arr[i-1]이 서로 같지 않다면, 역시 뽑는다. 마지막으로 used[i-1]이 이미 뽑혀서 1인 경우, i를 뽑는다.</p>
+
+<p>뽑게 된 후엔 picked에 i를 담고, used[i]는 1로 바꿔준다.
+이후 find(picked)를 통해 재귀호출을 진행한다.
+재귀 이후엔 picked.pop()을 통해 가장 마지막에 추가한 요소를 제거해 다음 요소를 탐색할 수 있게 한다. used[i]도 0으로 초기화 해준다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">find</span><span class="p">(</span><span class="nx">picked</span><span class="p">);</span>
+<span class="k">return</span> <span class="nx">combinations</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>마지막으로 find함수를 실행시켜 주고, 재귀가 끝나면 combinations를 반환한다.</p>
+:ET

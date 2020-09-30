@@ -1,0 +1,184 @@
+I"}-<p>웹 개발을 하다 보면 반응형 웹을 만들어야 하는 경우가 흔하죠.</p>
+
+<p>CSS로 반응형 웹을 작성할 때 우리는 미디어 쿼리를 사용합니다.</p>
+
+<p>미디어 쿼리 덕분에 비교적 편하게 반응형 웹을 만들 수 있지만, 서비스가 복잡해질수록 생각보다 이는 쉬운 방법이 아니라는 걸 깨닫게 되죠.</p>
+
+<p>보통 웹 애플리케이션이 복잡해지면 하나의 CSS 파일에 모든 스타일을 작성하기 보다는 여러 파일로 나눠 작성하게 됩니다.</p>
+
+<p>이 경우, 매 파일마다 미디어 쿼리를 새로 작성해야 하는 불편함이 생기죠.</p>
+
+<p>특히, CSS에는 변수가 없죠. 디바이스별 <code class="language-plaintext highlighter-rouge">min-width</code>나 <code class="language-plaintext highlighter-rouge">max-width</code>의 픽셀 값을 외우고 있다가 적용해야 합니다.</p>
+
+<p>매우 불편하지 않을 수 없습니다.</p>
+
+<p>오늘은 <strong>SCSS를 이용해서 간편하게 미디어 쿼리를 적용하는 방법</strong>을 살펴보겠습니다.</p>
+
+<h2 id="sassscss의-변수와-믹스인variables--mixins">Sass/SCSS의 변수와 믹스인(Variables &amp; mixins)</h2>
+
+<p>먼저, <strong>SCSS는 Sass의 상위호환(Superset)으로 CSS와 호환될 수 있는 문법</strong>을 가지고 있습니다.</p>
+
+<p>CSS와 문법이 좀 다른 Sass에 비해 SCSS는 거의 완벽히 CSS 문법과 호환이 되어 편리합니다.</p>
+
+<p>우리는 SCSS를 기반으로 살펴보겠습니다.</p>
+
+<h3 id="변수variables">변수(Variables)</h3>
+
+<p>변수를 사용할 수 있습니다!</p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$font-large</span><span class="p">:</span> <span class="m">3rem</span><span class="p">;</span>
+<span class="nv">$font-medium</span><span class="p">:</span> <span class="m">1</span><span class="mi">.6rem</span><span class="p">;</span>
+<span class="nv">$font-default</span><span class="p">:</span> <span class="m">1</span><span class="mi">.2rem</span><span class="p">;</span>
+<span class="nv">$font-small</span><span class="p">:</span> <span class="m">0</span><span class="mi">.8rem</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>이런 식으로 말이죠.</p>
+
+<p>그럼 변수는 어떻게 사용하면 될까요?</p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="si">#{</span><span class="nv">$font-large</span><span class="si">}</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>네, 이런식으로 변수로 값을 가져다 쓸 수 있습니다.</p>
+
+<p>통일성 있고 일체감 있는 스타일링이 매우 편해집니다.</p>
+
+<h3 id="믹스인mixins">믹스인(Mixins)</h3>
+
+<p>믹스인은 CSS를 묶어서 재사용할 수 있는 모듈로 만들어 줍니다.</p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@mixin</span> <span class="nf">card-view</span> <span class="p">{</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">22px</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="n">grey</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">4px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이렇게 선언한 믹스인은 다음과 같이 가져다 쓸 수 있습니다.</p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">div</span> <span class="p">{</span>
+  <span class="k">@include</span> <span class="nd">card-view</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>컴파일하면 아래처럼 바뀌죠.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">div</span> <span class="p">{</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">22px</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="n">grey</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">4px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="sassscss-미디어쿼리-작성">Sass/SCSS 미디어쿼리 작성</h2>
+
+<p>자, 이제 믹스인과 변수의 개념을 활용해 미디어쿼리를 작성해 보겠습니다.</p>
+
+<h3 id="변수-작성">변수 작성</h3>
+
+<p>먼저 변수를 선언하겠습니다.</p>
+
+<p>우리는 모바일, 태블릿, 데스크톱 세 환경을 대응하도록 변수를 선언하겠습니다.</p>
+
+<p><strong>_variables.scss</strong></p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Breakpoints</span>
+<span class="nv">$breakpoint-mobile</span><span class="p">:</span> <span class="m">335px</span><span class="p">;</span>
+<span class="nv">$breakpoint-tablet</span><span class="p">:</span> <span class="m">758px</span><span class="p">;</span>
+<span class="nv">$breakpoint-desktop</span><span class="p">:</span> <span class="m">1024px</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Scss 파일명 앞에 언더바 <code class="language-plaintext highlighter-rouge">_</code> 가 보이시나요? 언더바를 붙여서 작성해야 파일단위로 분리되어 컴파일 되지 않습니다.</p>
+
+<p>사실 <code class="language-plaintext highlighter-rouge">_variables.scss</code> 는 변수만 따로 저장해놓을 파일이기에 별도의 CSS 파일로 컴파일될 필요가 없습니다.</p>
+
+<p>이런 경우, 언더바를 파일명 앞에 붙이면, 성능 및 관리 상의 이득을 얻을 수 있겠죠.</p>
+
+<h3 id="믹스인-작성">믹스인 작성</h3>
+
+<p>다음으로 미디어쿼리를 이용하기 쉽도록 믹스인으로 작성할게요.</p>
+
+<p>먼저, 좀 전에 작성한 변수를 불러와(import) 줍니다.</p>
+
+<p><strong>_mixin.scss</strong></p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@import</span> <span class="s2">"./variables"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>불러올 때는 언더바나 확장자를 제외해도 정상 작동합니다! 참 편하죠?</p>
+
+<p>다음으로 본격적인 믹스인 작성을 진행해 보겠습니다.</p>
+
+<p><strong>_mixin.scss</strong></p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@import</span> <span class="s2">"./variables"</span><span class="p">;</span>
+
+<span class="k">@mixin</span> <span class="nf">mobile</span> <span class="p">{</span>
+  <span class="k">@media</span> <span class="p">(</span><span class="n">min-width</span><span class="o">:</span> <span class="si">#{</span><span class="nv">$breakpoint-mobile</span><span class="si">}</span><span class="p">)</span> <span class="nf">and</span> <span class="p">(</span><span class="n">max-width</span><span class="o">:</span> <span class="si">#{</span><span class="nv">$breakpoint-tablet</span> <span class="o">-</span> <span class="m">1px</span><span class="si">}</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">@content</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">@mixin</span> <span class="nf">tablet</span> <span class="p">{</span>
+  <span class="k">@media</span> <span class="p">(</span><span class="n">min-width</span><span class="o">:</span> <span class="si">#{</span><span class="nv">$breakpoint-tablet</span><span class="si">}</span><span class="p">)</span> <span class="nf">and</span> <span class="p">(</span><span class="n">max-width</span><span class="o">:</span> <span class="si">#{</span><span class="nv">$breakpoint-desktop</span> <span class="o">-</span> <span class="m">1px</span><span class="si">}</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">@content</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">@mixin</span> <span class="nf">desktop</span> <span class="p">{</span>
+  <span class="k">@media</span> <span class="p">(</span><span class="n">min-width</span><span class="o">:</span> <span class="si">#{</span><span class="nv">$breakpoint-desktop</span><span class="si">}</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">@content</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>자, 이렇게 모바일, 태블릿, 데스크톱에 대한 믹스인 작성을 완료했습니다.</p>
+
+<p>미디어 쿼리에서 <code class="language-plaintext highlighter-rouge">min-width</code>와 <code class="language-plaintext highlighter-rouge">max-width</code>를 변수를 활용해 적용했고 미디어 쿼리 내부에는 믹스인이 사용될 때 넘겨받은 콘텐트(content)가 들어가도록 했습니다.</p>
+
+<h3 id="믹스인을-활용한-미디어-쿼리">믹스인을 활용한 미디어 쿼리</h3>
+
+<p>자, 그럼 믹스인으로 작성한 미디어 쿼리를 사용해볼까요?</p>
+
+<p><strong>main.scss</strong></p>
+
+<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@import</span> <span class="s2">"../../Styles/mixins"</span><span class="p">;</span>
+
+<span class="k">@include</span> <span class="nd">mobile</span> <span class="p">{</span>
+  <span class="nc">.img-card</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">@include</span> <span class="nd">tablet</span> <span class="p">{</span>
+  <span class="nc">.img-card</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">200px</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">@include</span> <span class="nd">desktop</span> <span class="p">{</span>
+  <span class="nc">.img-card</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이렇게 믹스인을 사용하면 기기별로 손쉽게 미디어쿼리를 이용할 수 있습니다.</p>
+
+<h2 id="마치며">마치며</h2>
+
+<p>SCSS를 이용하면 삶이 참 편리해집니다.</p>
+
+<p>React에서도 <code class="language-plaintext highlighter-rouge">node-sass</code> 만 설치하면 Sass/SCSS를 이용할 수 있어 매우 편리하죠.</p>
+
+<p>앞으로는 쉽게 반응형 웹을 만들 수 있을 것 같습니다.</p>
+
+<h2 id="참고자료">참고자료</h2>
+
+<ul>
+  <li><a href="https://heropy.blog/2018/01/31/sass/">HEROPY Tech, “Sass(SCSS) 완전 정복!”</a></li>
+  <li><a href="https://css-tricks.com/approaches-media-queries-sass/">Eduardo Buoças, “Approaches to Media Queries in Sass”</a></li>
+</ul>
+:ET

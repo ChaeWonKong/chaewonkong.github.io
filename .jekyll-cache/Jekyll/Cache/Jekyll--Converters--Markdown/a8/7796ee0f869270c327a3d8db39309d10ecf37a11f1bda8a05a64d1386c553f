@@ -1,0 +1,638 @@
+I"B�
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ul>
+  <li><a href="#Table-of-Contents">Table of Contents</a></li>
+  <li><a href="#SocketIO-101">Socket.IO 101</a></li>
+  <li><a href="#Project-Structure">Project Structure</a></li>
+  <li><a href="#Installation">Installation</a></li>
+  <li><a href="#Express-Server">Express Server</a></li>
+  <li><a href="#React-Client">React Client</a></li>
+  <li><a href="#Connect-with-Socket">Connect with Socket</a></li>
+  <li><a href="#Sending-and-Receiving-Messages">Sending and Receiving Messages</a></li>
+  <li><a href="#Broadcasting-Messages">Broadcasting Messages</a></li>
+  <li><a href="#Using-Nicknames">Using Nicknames</a></li>
+</ul>
+
+<p>One thing that I love <strong>Socket.IO</strong> is <strong>simple wheareas powerful</strong>. With handful of lines of codes, you can build a chat app. All you have to do is adding few lines to your existing web app.</p>
+
+<p>If you are newby and wanna implement Socket.IO in your project, you’re on the right place. If you are not a newby but you wanna use it with React, than you’re also on the right place.</p>
+
+<p>Today we will make <strong>a simple chat app with React and Socket.IO</strong>.</p>
+
+<h2 id="socketio-101">Socket.IO 101</h2>
+
+<p>Sockets were the solution for real-time communication. You can push messages to the client from the server.</p>
+
+<p>One thing you need to know is, <strong>Socket.IO is not a WebSocket implementation.</strong></p>
+
+<blockquote>
+  <p>Socket.IO is NOT a WebSocket implementation. Although Socket.IO indeed uses WebSocket as a transport when possible, it adds some metadata to each packet: the packet type, the namespace and the ack id when a message acknowledgement is needed. That is why a WebSocket client will not be able to successfully connect to a Socket.IO server, and a Socket.IO client will not be able to connect to a WebSocket server either.
+<br /><br /> <strong>ref: https://socket.io/docs/</strong></p>
+</blockquote>
+
+<p>Socket.IO offers followings:</p>
+
+<ul>
+  <li>connectable even with proxies, load balancers, personal firewall and antivirus software.</li>
+  <li>auto-reconnection support</li>
+  <li>disconnection detection</li>
+  <li>binary support</li>
+  <li>room support</li>
+</ul>
+
+<h2 id="project-structure">Project Structure</h2>
+
+<pre><code class="language-cmd">├── client
+│   ├── README.md
+│   ├── node_modules
+│   ├── package.json
+│   ├── public
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   └── manifest.json
+│   ├── src
+│   │   ├── App.css
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   └── serviceWorker.js
+│   └── yarn.lock
+└── server
+    ├── node_modules
+    ├── index.js
+    ├── package-lock.json
+    └── package.json
+</code></pre>
+
+<p>This is our project structure. React app will be located in the client directory. Node/Express server will be located in the server directory.</p>
+
+<p>Since we are going to make our React app with CRA(create-react-app), it automatically offers a server for development environment.</p>
+
+<p>So, our <strong>server directory is for API server</strong>, not static server for React app.</p>
+
+<h2 id="installation">Installation</h2>
+
+<pre><code class="language-cmd">mkdir chat &amp;&amp; cd chat
+</code></pre>
+
+<p>Press enter until you see success message.</p>
+
+<p>Create server directory and change it to server.
+Then, initiate project with npm.</p>
+
+<pre><code class="language-cmd">mkdir server &amp;&amp; cd server
+npm init
+</code></pre>
+
+<p>Then install node, express and socket</p>
+
+<pre><code class="language-cmd">npm install --save node express socket.io
+npm install --save-dev concurrently
+</code></pre>
+
+<p>“concurrently” will run your client/server at dev.</p>
+
+<p>Then create-react-app with dir name client.</p>
+
+<pre><code class="language-cmd">npm create-react-app client
+cd client
+npm install --save socket.io-client
+</code></pre>
+
+<p>“socket.io-client” is a client-side lib for Socket.IO.</p>
+
+<p>Lastly, we need to add som script to run our two servers(node/express chat server and React client-side server).</p>
+
+<p><strong>server/package.json</strong></p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+</span><span class="err">...</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npm run start --prefix ../client"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node index.js"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"dev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"concurrently </span><span class="se">\"</span><span class="s2">npm run start</span><span class="se">\"</span><span class="s2"> </span><span class="se">\"</span><span class="s2">npm run client</span><span class="se">\"</span><span class="s2">"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"express"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.17.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^12.3.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"socket.io"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^2.2.0"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"concurrently"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.1.0"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Add scripts for running two servers concurrently.</p>
+
+<p>At this point, you can test your React app with following command:</p>
+
+<pre><code class="language-cmd">npm run dev
+</code></pre>
+
+<p>If you go to “http://localhost:3000”, you will see React icon spinning with dark grey background.</p>
+
+<h2 id="express-server">Express Server</h2>
+
+<p>Now is the time to set our chat server.</p>
+
+<p>Inside the server directory, create index.js file.</p>
+
+<p><strong>server/index.js</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">http</span><span class="dl">"</span><span class="p">).</span><span class="nx">Server</span><span class="p">(</span><span class="nx">app</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">io</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">socket.io</span><span class="dl">"</span><span class="p">)(</span><span class="nx">server</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">5000</span><span class="p">;</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Listen on *: </span><span class="p">${</span><span class="nx">PORT</span><span class="p">}</span><span class="s2">`</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>Firstly, import express, http, socket.io to create chat server.
+Then set PORT.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">5000</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>This code sets port with 5000 if our server is running on localhost.</p>
+
+<p>When node is running on real server, it offers “process.env.PORT”, so we can use it instead of 5000.</p>
+
+<p>Done?
+Then we need to add some code to run Socket.IO.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">io</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">connection</span><span class="dl">"</span><span class="p">,</span> <span class="nx">socket</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">client</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`User connected: </span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>“socket.client” will provide id of the client. So the code above basically means whenever a user is connected, log userId on the console.</p>
+
+<p>In order to see the outcome, we need to add some code on client-side.
+We will comeback to server to add more features like getting and broadcasting messages and using user nicknames.</p>
+
+<h2 id="react-client">React Client</h2>
+
+<p>Delete all other codes and add following:</p>
+
+<p><strong>client/src/App.js</strong></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">io</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">socket.io-client</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://localhost:5000</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="p">/&gt;;</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Code below connects chat server running on “localhost:5000”.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://localhost:5000</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="connect-with-socket">Connect with Socket</h2>
+
+<p>Now, we are ready to test our chat app.
+Change directory to server and run “npm run dev” command.</p>
+
+<p>You will encounter message like this on your terminal.</p>
+
+<pre><code class="language-cmd">User connected: wpjY_7eDVNoV5vD5AAAA
+</code></pre>
+
+<p>Actual userId may differ.</p>
+
+<p>If you open another browser and go to “localhost:3000” where React client is running on, you will see another message in your terminal.</p>
+
+<pre><code class="language-cmd">User connected: wpjY_7eDVNoV5vD5AAAA
+User connected: T7jFW_AB04woSrhzAAAB
+</code></pre>
+
+<p>Whenever user comes to our React client, the server will console log userId.</p>
+
+<h2 id="sending-and-receiving-messages">Sending and Receiving Messages</h2>
+
+<p>It’s time to add message communication to our app. Change your directory to server.</p>
+
+<p>In order to receive and broadcast messages, we need to add codes to both client and server.</p>
+
+<p><strong>server/index.js</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="nx">msg</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">: </span><span class="p">${</span><span class="nx">msg</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Add this code just below of console logging userId.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="nx">msg</span> <span class="o">=&gt;</span> <span class="p">{});</span>
+</code></pre></div></div>
+
+<p>This line is about receiving messages from the users. Any messages come from users will contained msg variable.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">: </span><span class="p">${</span><span class="nx">msg</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>This will log userId and message on your terminal.</p>
+
+<p>At this point, our entire code on “server/index.js” looks like:</p>
+
+<p><strong>server/index.js</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">http</span><span class="dl">"</span><span class="p">).</span><span class="nx">Server</span><span class="p">(</span><span class="nx">app</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">io</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">socket.io</span><span class="dl">"</span><span class="p">)(</span><span class="nx">server</span><span class="p">);</span>
+
+<span class="nx">io</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">connection</span><span class="dl">"</span><span class="p">,</span> <span class="nx">socket</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">client</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`User connected: </span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="nx">msg</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">: </span><span class="p">${</span><span class="nx">msg</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">5000</span><span class="p">;</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Listen on *: </span><span class="p">${</span><span class="nx">PORT</span><span class="p">}</span><span class="s2">`</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>Change your directory to client</p>
+
+<p><strong>client/src/App.js</strong></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Import Component</span>
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">io</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">socket.io-client</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://localhost:5000</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// Change to class component</span>
+<span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="c1">// Add constructor to initiate</span>
+  <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">msg</span><span class="p">:</span> <span class="dl">""</span> <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Function for getting text input</span>
+  <span class="nx">onTextChange</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="na">msg</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span> <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Function for sending message to chat server</span>
+  <span class="nx">onMessageSubmit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="na">msg</span><span class="p">:</span> <span class="dl">""</span> <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">onTextChange</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="si">}</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">msg</span><span class="si">}</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">onMessageSubmit</span><span class="si">}</span><span class="p">&gt;</span>Send<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>I commented details on the code above. Firstly, we will change our App component to class based component in order to use state.</p>
+
+<p>Then we add input and button for chat message. Add onTextChange and OnMessageSubmit to handle and send message.</p>
+
+<p>Let’s test it. Change directory to server and “npm run dev”.
+When server is ready, go to “localhost:3000” and type something inside the input form and press send button.</p>
+
+<pre><code class="language-cmd">cNd0Cv5-Q8BkhYI_AAAB: hi there
+</code></pre>
+
+<p>You can see message on your terminal.</p>
+
+<h2 id="broadcasting-messages">Broadcasting Messages</h2>
+
+<p>Next step is broadcasting of messages. Broadcasting means sending received messages to all users in the same network.</p>
+
+<p>To broadcast messages, we need to modify both server-side and client-side codes.</p>
+
+<p>First, let’s start from server.</p>
+
+<p><strong>server/index.js</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">io</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">connection</span><span class="dl">"</span><span class="p">,</span> <span class="nx">socket</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">client</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`User connected: </span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="nx">msg</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// console.log(`${id}: ${msg}`);</span>
+    <span class="nx">io</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="nx">msg</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>“io.emit” is a magical spell that broadcasts messages to all users.</p>
+
+<p>Move to client directory.</p>
+
+<p>Change constructor:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">msg</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span> <span class="na">chat</span><span class="p">:</span> <span class="p">[]</span> <span class="p">};</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Add chat to state.</p>
+
+<p>Then, add componentDidMount function to get messages from server.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="p">({</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// Add new messages to existing messages in "chat"</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+        <span class="na">chat</span><span class="p">:</span> <span class="p">[...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">chat</span><span class="p">,</span> <span class="p">{</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">}]</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Create new function called “renderChat”. This will help rendering messages contained in “this.state.chat” array.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">renderChat</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">chat</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">chat</span><span class="p">.</span><span class="nx">map</span><span class="p">(({</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">},</span> <span class="nx">idx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">idx</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">green</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">id</span><span class="si">}</span>: <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">msg</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">));</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>I made id to be green to distinguish it from messages. Notice that div tag has a key prop. <strong>Whenever map things in array to generate jsx tags, you need to provide key prop.</strong> Luckily, Array.prototype.map offers second param that offers index. We will use that index as a key.</p>
+
+<p>Then add “renderChat” function to our jsx component.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">onChange=</span><span class="s">{e</span> <span class="err">=</span><span class="nt">&gt;</span> this.onTextChange(e)} value={this.state.msg} /&gt;
+  <span class="nt">&lt;button</span> <span class="na">onClick=</span><span class="s">"{this.onMessageSubmit}"</span><span class="nt">&gt;</span>Send<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;div&gt;</span>{this.renderChat()}<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>The whole code looks like:</p>
+
+<p><strong>client/src/App.js</strong></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">io</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">socket.io-client</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://localhost:5000</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">msg</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span> <span class="na">chat</span><span class="p">:</span> <span class="p">[]</span> <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="p">({</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+        <span class="na">chat</span><span class="p">:</span> <span class="p">[...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">chat</span><span class="p">,</span> <span class="p">{</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">}]</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">onTextChange</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="na">msg</span><span class="p">:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span> <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="nx">onMessageSubmit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="na">msg</span><span class="p">:</span> <span class="dl">""</span> <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="nx">renderChat</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">chat</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">chat</span><span class="p">.</span><span class="nx">map</span><span class="p">(({</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">},</span> <span class="nx">idx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">idx</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">green</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">id</span><span class="si">}</span>: <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">msg</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">onTextChange</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="si">}</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">msg</span><span class="si">}</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">onMessageSubmit</span><span class="si">}</span><span class="p">&gt;</span>Send<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">renderChat</span><span class="p">()</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Let’s run our app again.
+Whenever you type message and press send button, you can see the message on the page with green-colored id.</p>
+
+<h2 id="using-nicknames">Using Nicknames</h2>
+
+<p>Isn’t it annoying to see “xMhBSuo20CaN2HBRAAAD” or “Aso4wXNOH31vgt1sAAAG” instead of nicknames of users?</p>
+
+<p>Last step. <strong>Let’s provide nicknames.</strong> Let’s add another input to get nicknames from the users.</p>
+
+<p>This time, client-side first.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">msg</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span> <span class="na">chat</span><span class="p">:</span> <span class="p">[],</span> <span class="na">nickname</span><span class="p">:</span> <span class="dl">""</span> <span class="p">};</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Add nickname to state.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="p">({</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+        <span class="na">chat</span><span class="p">:</span> <span class="p">[...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">chat</span><span class="p">,</span> <span class="p">{</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">}]</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Change “msg” param to “{ nickname, msg }”.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">onTextChange</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="p">[</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">name</span><span class="p">]:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span> <span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Change “onTextChange” function to handle both nickname change and message change.
+Possible “e.target.name” could be “nickname” and “msg”.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">onMessageSubmit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+  <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">});</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="na">msg</span><span class="p">:</span> <span class="dl">""</span> <span class="p">});</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Change “onMessageSubmit” function to send nickname with message.
+Careful that we don’t erase nickname after sending messages.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">renderChat</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">chat</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">chat</span><span class="p">.</span><span class="nx">map</span><span class="p">(({</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">},</span> <span class="nx">idx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">idx</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">green</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">nickname</span><span class="si">}</span>: <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">msg</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">));</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Change “id” to “nickname”.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Nickname<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span>
+    <span class="na">name</span><span class="p">=</span><span class="s">"nickname"</span>
+    <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">onTextChange</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="si">}</span>
+    <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">nickname</span><span class="si">}</span>
+  <span class="p">/&gt;</span>
+  <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Message<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">input</span>
+    <span class="na">name</span><span class="p">=</span><span class="s">"msg"</span>
+    <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">onTextChange</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="si">}</span>
+    <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">msg</span><span class="si">}</span>
+  <span class="p">/&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">onMessageSubmit</span><span class="si">}</span><span class="p">&gt;</span>Send<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">renderChat</span><span class="p">()</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>Add span tags to distinguish nickname field from message field.</p>
+
+<p>Full code looks like:
+<strong>client/src/App.js</strong></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">io</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">socket.io-client</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://localhost:5000</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="na">msg</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span> <span class="na">chat</span><span class="p">:</span> <span class="p">[],</span> <span class="na">nickname</span><span class="p">:</span> <span class="dl">""</span> <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="p">({</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+        <span class="na">chat</span><span class="p">:</span> <span class="p">[...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">chat</span><span class="p">,</span> <span class="p">{</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">}]</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">onTextChange</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="p">[</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">name</span><span class="p">]:</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span> <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="nx">onMessageSubmit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="na">msg</span><span class="p">:</span> <span class="dl">""</span> <span class="p">});</span>
+  <span class="p">};</span>
+
+  <span class="nx">renderChat</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">chat</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">chat</span><span class="p">.</span><span class="nx">map</span><span class="p">(({</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">},</span> <span class="nx">idx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">idx</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">green</span><span class="dl">"</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">nickname</span><span class="si">}</span>: <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">msg</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Nickname<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span>
+          <span class="na">name</span><span class="p">=</span><span class="s">"nickname"</span>
+          <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">onTextChange</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="si">}</span>
+          <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">nickname</span><span class="si">}</span>
+        <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Message<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span>
+          <span class="na">name</span><span class="p">=</span><span class="s">"msg"</span>
+          <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">onTextChange</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="si">}</span>
+          <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">msg</span><span class="si">}</span>
+        <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">onMessageSubmit</span><span class="si">}</span><span class="p">&gt;</span>Send<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">renderChat</span><span class="p">()</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Let’ move to server-side.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">io</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">connection</span><span class="dl">"</span><span class="p">,</span> <span class="nx">socket</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">client</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`User Connected: </span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="p">({</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">io</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Add nickname to param object.
+Make server to broadcast message with nickname.</p>
+
+<p>Entire code:
+<strong>server/index.js</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">http</span><span class="dl">"</span><span class="p">).</span><span class="nx">Server</span><span class="p">(</span><span class="nx">app</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">io</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">socket.io</span><span class="dl">"</span><span class="p">)(</span><span class="nx">server</span><span class="p">);</span>
+
+<span class="nx">io</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">connection</span><span class="dl">"</span><span class="p">,</span> <span class="nx">socket</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">id</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">client</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`User Connected: </span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="p">({</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">io</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="dl">"</span><span class="s2">chat message</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">msg</span> <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">5000</span><span class="p">;</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Listen on *: </span><span class="p">${</span><span class="nx">PORT</span><span class="p">}</span><span class="s2">`</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>Let’s run our app.
+Now we can send messages between users with own nicknames.
+Cool, isn’t it?</p>
+
+<p>Yeah, it’s not beautiful. We definitely need to add some style but, it works! That’s all that matters.</p>
+
+:ET

@@ -1,0 +1,135 @@
+I">M<p>문제 출처: <a href="https://algospot.com">알고스팟</a> <br />
+URL: <a href="https://algospot.com/judge/problem/read/PICNIC">https://algospot.com/judge/problem/read/PICNIC</a>
+<br />
+ID: PICNIC</p>
+
+<hr />
+<h2 id="소풍-picnic">소풍 (PICNIC)</h2>
+<p>서로 친구 사이인 학생 끼리만 짝을 지어줄 수 있는 모든 방법의 수를 구한다.</p>
+
+<h3 id="입력">입력</h3>
+<p>입력의 첫 줄에는 테스트 케이스의 수 C (C &lt;= 50) 가 주어진다. 각 테스트 케이스의 첫 줄에는 학생의 수 n (2 &lt;= n &lt;= 10) 과 친구 쌍의 수 m (0 &lt;= m &lt;= n*(n-1)/2) 이 주어진다. 그 다음 줄에 m 개의 정수 쌍으로 서로 친구인 두 학생의 번호가 주어진다. 번호는 모두 0 부터 n-1 사이의 정수이고, 같은 쌍은 입력에 두 번 주어지지 않는다. 학생들의 수는 짝수이다.</p>
+
+<h3 id="출력">출력</h3>
+<p>각 테스트 케이스마다 한 줄에 모든 학생을 친구끼리만 짝지어줄 수 있는 방법의 수를 출력한다.</p>
+
+<h3 id="전체-코드">전체 코드</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">numbers_of_cases</span><span class="p">(</span><span class="n">are_friends</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">are_friends</span><span class="p">)</span>
+    <span class="n">taken</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">N</span>
+
+    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="n">left</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">left</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">taken</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">nxt</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="k">break</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nxt</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">taken</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="n">are_friends</span><span class="p">[</span><span class="n">nxt</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">taken</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">taken</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="n">find</span><span class="p">(</span><span class="n">left</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">taken</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">taken</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">count</span>
+    
+    <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="c1"># Three Example Test Cases
+</span>    <span class="n">T</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()]</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()]</span>
+        <span class="n">are_friends</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">):</span>
+            <span class="n">are_friends</span><span class="p">[</span><span class="n">temp</span><span class="p">[</span><span class="n">idx</span><span class="p">]][</span><span class="n">temp</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">are_friends</span><span class="p">[</span><span class="n">temp</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]][</span><span class="n">temp</span><span class="p">[</span><span class="n">idx</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="mi">2</span>
+        <span class="n">results</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">numbers_of_cases</span><span class="p">(</span><span class="n">are_friends</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">ret</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="풀이">풀이</h3>
+<p>학생을 Vertex, 친구 사이인지 여부를 Edge로 보면 이 문제는 그래프를 활용해 풀 수 있는 문제임을 알 수 있다.</p>
+
+<p>먼저 입력으로 주어지는 정보를 처리하는 코드를 작성한다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="c1"># Three Example Test Cases
+</span>    <span class="n">T</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()]</span>
+        <span class="n">are_friends</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">):</span>
+            <span class="n">are_friends</span><span class="p">[</span><span class="n">temp</span><span class="p">[</span><span class="n">idx</span><span class="p">]][</span><span class="n">temp</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">are_friends</span><span class="p">[</span><span class="n">temp</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]][</span><span class="n">temp</span><span class="p">[</span><span class="n">idx</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="mi">2</span>
+        <span class="n">results</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">numbers_of_cases</span><span class="p">(</span><span class="n">are_friends</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">ret</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+</code></pre></div></div>
+<p>테스트 케이스의 수 T에 대해 각 테스트마다 n, m을 입력받는다. 이후 친구들끼리 짝지어진 입력을 리스트로 변환하여 temp에 저장한다. are_friends는 n * n으로 구성된 2차원 배열로 두 정점이 서로 친구인지 여부를 기록할 인접행렬이다(adjacent matrix).</p>
+
+<p>idx를 0으로 선언한 후 , idx가 temp의 길이보다 작은 경우 while문을 실행시켜 인접행렬 are_friends를 채워나간다. while문을 실행하면 idx는 2씩 커지며 temp의 원소를 하나 걸러 하나씩 순회하게 되고, are_friends에 친구 여부가 표시되게 된다.</p>
+
+<p>이후 results라는 결과를 담을 리스트에 추후 작성할 함수를 호출하고 그 결과를 담는다. 해당 함수 numbers_of_cases에 are_friends를 매개변수로 준다.</p>
+
+<p>실행이 완료된 경우 결과값을 하나씩 출력해주는 작업을 진행하면 된다.</p>
+
+<p>다음으로 numbers_of_cases 함수를 구현하는 코드를 살펴본다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">numbers_of_cases</span><span class="p">(</span><span class="n">are_friends</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">are_friends</span><span class="p">)</span>
+    <span class="n">taken</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">N</span>
+
+    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="n">left</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">left</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">taken</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">nxt</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="k">break</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nxt</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">taken</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="n">are_friends</span><span class="p">[</span><span class="n">nxt</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">taken</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">taken</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="n">find</span><span class="p">(</span><span class="n">left</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">taken</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">taken</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">count</span>
+    
+    <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>numbers_of_cases 함수는 인접행렬인 are_friends를 매개변수로 받는다. 먼저 함수 내에서 are_friends의 길이를 N에 저장하고, taken이라는 N개의 0으로 이루어진 배열(리스트)를 생성한다. taken은 짝을 지어진 번호들을 tracking하기 위해 생성하는 리스트로, 짝이 지어진 원소에 해당하는 인덱스는 1로 바꿔줄 것이다.</p>
+
+<p>각 정점(vertex)를 순회하며(정점을 선택하며) 짝인 경우만 뽑는 경우의 수를 찾아야 한다. 따라서 이 문제는 DFS를 활용하며, 재귀호출을 사용해 풀기로 한다. 참고로 재귀호출은 Stack 개념과 관련이 깊다.</p>
+
+<p>find 함수를 보자. 이 함수는 경우의 수를 세는 함수이다. 매개변수로는 짝이 지어지고 남은 학생의 수가 들어간다. 만약 남은 학생의 수가 0이라면 짝이 모두 지어졌으므로 1을 반환하고 종료한다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">left</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">return</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>전체 학생 수에 대해 만약 i가 뽑히지 않았다면 nxt에 i를 할당한다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">taken</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+        <span class="n">nxt</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">break</span>
+</code></pre></div></div>
+<p>nxt를 선택한 상황에서 나머지 하나를 뽑는 방법이므로 nxt+1부터 N 사이에서 j를 선택한다. 이 중 j가 뽑히지 않았고, j와 nxt가 친구라면 짝을 지어준다.
+짝은 2명씩 지어지므로 짝을 하나 완성하였으면 left-2를 한 값을 find함수로 재귀호출 진행한다. 재귀호출이 종료된 후에는 taken을 초기화 해준다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nxt</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">taken</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="n">are_friends</span><span class="p">[</span><span class="n">nxt</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+        <span class="n">taken</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">taken</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="n">find</span><span class="p">(</span><span class="n">left</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">taken</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">taken</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre></div></div>
+<p>한편 find(left-2)를 재귀호출로 진행한 결과값은 count에 더해나가도록 설정한다.</p>
+
+<p>모든 작업이 끝났으면 count를 반환하고 종료한다.</p>
+:ET

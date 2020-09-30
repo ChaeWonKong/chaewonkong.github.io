@@ -1,0 +1,135 @@
+I"�7<p>오늘은 Python의 데크(deque)라는 자료구조에 대해 알아보고, 어떤 상황에서 사용해야 하는지에 대해 살펴본다.</p>
+
+<h2 id="데크deque의-개념">데크(deque)의 개념</h2>
+
+<p>보통 큐(queue)는 선입선출(FIFO) 방식으로 작동한다. 반면, <strong>양방향 큐</strong>가 있는데 그것이 바로 <strong>데크(deque)</strong>다.</p>
+
+<p>즉, <strong>앞, 뒤 양쪽 방향에서 엘리먼트(element)를 추가하거나 제거할 수 있다.</strong></p>
+
+<p>데크는 양 끝 엘리먼트의 append와 pop이 압도적으로 빠르다.</p>
+
+<p>컨테이너(container)의 양끝 엘리먼트(element)에 접근하여 삽입 또는 제거를 할 경우, <strong>일반적인 리스트(list)가 이러한 연산에 O(n)이 소요되는 데 반해, 데크(deque)는 O(1)</strong>로 접근 가능하다.</p>
+
+<h2 id="데크deque-사용법">데크(deque) 사용법</h2>
+
+<p>데크는 다음처럼 임포트(import)해 사용한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="n">deq</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+
+<span class="c1"># Add element to the start
+</span><span class="n">deq</span><span class="p">.</span><span class="n">appendleft</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Add element to the end
+</span><span class="n">deq</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Pop element from the start
+</span><span class="n">deq</span><span class="p">.</span><span class="n">popleft</span><span class="p">()</span>
+
+<span class="c1"># Pop element from the end
+</span><span class="n">deq</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>데크(deque)에 존재하는 메서드(method)는 대략 다음과 같다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">deque.append(item)</code>: item을 데크의 오른쪽 끝에 삽입한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">deque.appendleft(item)</code>: item을 데크의 왼쪽 끝에 삽입한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">deque.pop()</code>: 데크의 오른쪽 끝 엘리먼트를 가져오는 동시에 데크에서 삭제한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">deque.popleft()</code>: 데크의 왼쪽 끝 엘리먼트를 가져오는 동시에 데크에서 삭제한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">deque.extend(array)</code>: 주어진 배열(array)을 순환하면서 데크의 오른쪽에 추가한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">deque.extendleft(array)</code>: 주어진 배열(array)을 순환하면서 데크의 왼쪽에 추가한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">deque.remove(item)</code>: item을 데크에서 찾아 삭제한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">deque.rotate(num)</code>: 데크를 num만큼 회전한다(양수면 오른쪽, 음수면 왼쪽).</li>
+</ul>
+
+<p>여기서 rotate() 메서드(method)가 특히 재밌는데, 설명이 부족하니 코드를 추가해 보겠다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1"># Contain 1, 2, 3, 4, 5 in deq
+</span><span class="n">deq</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="n">deq</span><span class="p">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deq</span><span class="p">)</span>
+<span class="c1"># deque([5, 1, 2, 3, 4])
+</span>
+<span class="n">deq</span><span class="p">.</span><span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deq</span><span class="p">)</span>
+<span class="c1"># deque([1, 2, 3, 4, 5])
+</span></code></pre></div></div>
+
+<p>이렇게 양수 값 또는 음수 값을 파라미터(parameter)로 제공하여 데크(deque)를 좌, 우로 회전할 수 있다.</p>
+
+<h2 id="데크deque-언제-왜-써야-하는가">데크(deque), 언제, 왜 써야 하는가?</h2>
+
+<p>요약하자면, 데크(deque)는 스택처럼 사용할 수도 있고, 큐 처럼 사용할 수도 있다.</p>
+
+<p>시작점의 값을 넣고 빼거나, 끝 점의 값을 넣고 빼는 데 최적화된 연산 속도를 제공한다.</p>
+
+<p>즉, 대부분의 경우에 데크(deque)는 리스트(list)보다 월등한 옵션이다.</p>
+
+<p>데크는 특히 push/pop 연산이 빈번한 알고리즘에서 리스트보다 월등한 속도를 자랑한다.</p>
+
+<p>일례로 백준 7576번 “토마토” 문제에서 익은 토마토를 리스트에 담도록 코드를 짜면 시간초과로 통과에 실패하지만, 데크를 사용하면 무난히 통과한다.</p>
+
+<p>마지막으로 <code class="language-plaintext highlighter-rouge">백준 토마토(7576) 문제의 Python 코드</code>를 공유하며 데크 사용법을 마친다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tomatoes</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Count number of days
+</span>    <span class="n">deq</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+    <span class="c1"># deq = list()
+</span>    <span class="n">D</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="n">searched_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">D</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">row</span> <span class="o">+</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="ow">and</span> <span class="n">col</span> <span class="o">+</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">row</span> <span class="o">+</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">col</span> <span class="o">+</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">tomatoes</span><span class="p">[</span><span class="n">row</span> <span class="o">+</span> <span class="n">i</span><span class="p">][</span><span class="n">col</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">tomatoes</span><span class="p">[</span><span class="n">row</span> <span class="o">+</span> <span class="n">i</span><span class="p">][</span><span class="n">col</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="n">searched_list</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">row</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="o">+</span> <span class="n">j</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">searched_list</span>
+
+    <span class="c1"># Add all riped tomatoes
+</span>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">tomatoes</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">deq</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+
+    <span class="c1"># Search begin
+</span>    <span class="k">while</span> <span class="n">deq</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">deq</span><span class="p">)):</span>
+            <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">deq</span><span class="p">.</span><span class="n">popleft</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">tomato</span> <span class="ow">in</span> <span class="n">search</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+                <span class="n">deq</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">tomato</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Check unriped tomato(es) after search
+</span>    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">tomatoes</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">M</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">))</span>
+    <span class="n">tomatoes</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">solution</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">tomatoes</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+<h2 id="참고자료">참고자료</h2>
+
+<ul>
+  <li><a href="https://www.geeksforgeeks.org/deque-in-python/">GeeksforGeeks - Deque in Python</a></li>
+  <li><a href="https://godoftyping.wordpress.com/2015/04/24/python-%EB%8D%B0%ED%81%ACdeque/">GOD.OF.TYPING - [python]데크(deque)</a></li>
+  <li><a href="https://www.acmicpc.net/problem/7576">백준 7576번 - 토마토</a></li>
+</ul>
+:ET

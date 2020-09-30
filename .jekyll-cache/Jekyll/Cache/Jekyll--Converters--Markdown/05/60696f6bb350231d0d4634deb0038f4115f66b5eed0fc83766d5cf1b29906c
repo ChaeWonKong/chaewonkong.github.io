@@ -1,0 +1,128 @@
+I"�,<p><br /></p>
+<h2 id="차례">차례</h2>
+<p><a href="#0"><strong>1. Window 객체</strong></a><br />
+<a href="#1"><strong>2. BOM</strong></a><br />
+<a href="#2"><strong>3. DOM</strong></a><br /></p>
+<ul>
+  <li>3.1 Node</li>
+  <li>3.2 Element</li>
+  <li>3.3 Document<br /></li>
+</ul>
+
+<p><a href="#3"><strong>4. 마치며</strong></a><br />
+<a href="#4"><strong>5. 출처</strong></a><br /></p>
+
+<p id="0" />
+
+<h2 id="1-window-객체">1. Window 객체</h2>
+<p><img alt="Window Object" src="http://learn.javascript.ru/article/browser-environment/windowObjects@2x.png" /></p>
+<blockquote>
+  <p>출처: <a href="http://learn.javascript.ru/browser-environment">http://learn.javascript.ru/browser-environment</a></p>
+</blockquote>
+
+<p>태초에 Window 객체가 있다. Window 객체는 쉽게 말해 <strong>지금 보고 있는 브라우저 화면 창</strong>을 의미한다고 보면 된다.</p>
+
+<p>Window 객체는 <strong>전역 객체</strong>이다. 전역변수와 전역 스코프에서 선언된 함수는 Window 객체의 Property 이다.</p>
+
+<p>Window 객체의 프로퍼티에 접근할 때, “window”는 <strong>생략 가능</strong>하다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello World!</span><span class="dl">"</span><span class="p">);</span>
+<span class="c1">// Hello World!</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello World!</span><span class="dl">"</span><span class="p">);</span>
+<span class="c1">// Hello World!</span>
+</code></pre></div></div>
+<p>위와 같이 “window”를 생략하더라도 결과는 같다. Window 객체 아래에는 JavaScript, DOM, BOM이 있다. JavaScript는 정적인 페이지를 동적으로 수정할 수 있게 도와주는 스크립트 언어이다. DOM(Document Object Model)은 HTML/XML 문서 객체 모델로 주로 HTML로 짜여진 문서가 JavaScript 객체에 대응되는 것을 의미한다. BOM(Browser Object Model)은 브라우저 객체 모델로 주로 JavaScript를 이용해 브라우저에 특정 기능을 수행시킬 때 사용한다.</p>
+
+<p id="1" />
+
+<h2 id="2-bom">2. BOM</h2>
+<p>BOM(Browser Object Model)은 브라우저 객체 모델을 의미한다. 주로 새 창을 열거나, 위치 정보를 수집하거나, 화면 사이즈 정보를 수집하는 등 <strong>브라우저를 제어하기 위해</strong> 사용한다. Navigator, Screen, Location, History, XMLHttpRequest 등이 BOM에 해당한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">navigator</span><span class="p">.</span><span class="nx">geolocation</span><span class="p">.</span><span class="nx">getCurrentPosition</span><span class="p">(</span><span class="nx">pos</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">pos</span><span class="p">))</span>
+<span class="c1">// Position {coords: Coordinates, timestamp: 1551706841519}</span>
+<span class="c1">// coords: Coordinates {latitude: 37.5483668, longitude: 126.92545369999999, altitude: null, accuracy: 22, altitudeAccuracy: null, …}</span>
+<span class="c1">// timestamp: 1551706841519</span>
+<span class="c1">// __proto__: </span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">availWidth</span><span class="p">)</span>
+<span class="c1">// 1920</span>
+</code></pre></div></div>
+
+<p id="2" />
+
+<h2 id="3-dom">3. DOM</h2>
+<p><img alt="DOM Tree" src="https://s3.ap-northeast-2.amazonaws.com/opentutorials-user-file/module/904/2242.png" /></p>
+<blockquote>
+  <p>출처: <a href="https://opentutorials.org/course/1375/6698">생활코딩</a></p>
+</blockquote>
+
+<p>다음으로 DOM에 대해 알아본다. DOM은 HTML/XML 문서의 프로그래밍 인터페이스로 W3C의 공식 표준이다. DOM은 <strong>HTML/XML 문서를 브라우저에서 동적으로 제어</strong>하기 위해 탄생하였다. 과거 각 브라우저 간 서로 상이한 DOM 구조로 인해 웹 페이지의 호환 문제가 컸기에, W3C에서 DOM 표준 규격을 작성하게 되었다.</p>
+
+<p>DOM은 구조화된 Node, Property, Method를 갖고 있는 객체로서 문서를 표현한다. DOM은 Tree 구조로 이루어져 있다. 따라서 DOM Tree 라고도 부른다. DOM은 웹 페이지의 객체 지향 표현이며 JavaScript와 같은 스크립팅 언어를 이용해 DOM을 수정할 수 있다. 쉽게 말해 <strong>HTML 태그로 이루어진 문서를 JavaScript로 이용하기 쉽도록 객체화 한 것을 문서 객체라고 한다.</strong></p>
+
+<p>한편, DOM에는 <strong>조상 격인 Node라는 개념</strong>이 있다. <strong>DOM의 모든 하위 객체들은 Node를 상속</strong>한다. DOM의 객체로는 Node, Element, Document 등이 있다.</p>
+
+<h3 id="31-node">3.1 Node</h3>
+<p>먼저 Node는 Tree 구조에서 Root를 포함한 모든 개개의 개체를 표현하는 단어다.</p>
+
+<p><strong>엘리먼트는 서로 부모, 자식, 혹은 형제자매 관계로 연결되어 있는데, 각각의 Node가 다른 Node와 연결되어 있기에 Node에서 Node로 탐색하며 문서를 탐색</strong>할 수 있다.</p>
+
+<p>Node는 앞서 말했듯이 모든 DOM 객체의 조상 같은 존재로 모든 구성 요소를 대표하며 <strong>각 구성요소가 어떤 카테고리에 속하는지 알려주는 역할</strong>도 담당한다.</p>
+
+<p>Node.nodeType, Node.nodeName과 같은 Method를 이용해 <strong>해당 노드의 특징을 파악</strong>할 수 있다. 그 밖에 Node API를 이용해 <strong>해당 노드에 값을 추가하거나 자식(Children)을 관리</strong>할 수도 있다.</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Hello<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>Node의 API를 활용해 문서를 탐색해보자.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">body</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">firstChild</span><span class="p">.</span><span class="nx">nextSibling</span><span class="p">)</span>
+<span class="c1">//&lt;p&gt;Hello&lt;/p&gt;</span>
+</code></pre></div></div>
+
+<h3 id="32-element">3.2 Element</h3>
+<p>다음으로 Element에 대해 알아보자. Element는 HTML/XML에서 태그를 공식적으로 표현하는 용어이다. DOM은 앞서 말했듯이 HTML만을 위해 존재하는 것이 아니다. XML, SVG 등과 같은 마크업 언어도 DOM을 통해 제어된다. 따라서 Element는 일반적인 속성을 정의하고 있고, <strong>우리가 실제 주로 사용하는 것은 HTMLElement이다.</strong></p>
+
+<p>Element.className, Element.id와 같은 식별자 API, Element.getElementsByClassName
+Element.getElementsByTagName, Element.querySelector와 같은 조회 API,Element.getAttribute(name), Element.setAttribute(name, value)와 같은 속성 API 등이 존재한다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="33-document">3.3 Document</h3>
+<p>Document 객체는 문서 자체를 의미하며, Window 객체의 소속이다. <strong>브라우저가 불러온 웹 페이지를 나타내며, DOM Tree의 진입점 역할을 수행</strong>한다. Document는 페이지의 URL을 얻거나 문서에 새로운 요소를 생성하는 등의 기능을 전역적으로 제공한다. HTML 문서는 HTMLDocument 인터페이스로 구현되며, XML과 SVG 문서는 XMLDocument 인터페이스를 통해 구현된다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nb">document</span><span class="p">);</span>
+<span class="c1">// #document</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="c1">// &lt;!doctype html&gt;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="c1">// &lt;html&gt;...</span>
+</code></pre></div></div>
+<p>실제로 실행해보면 자식노드로 Doctype과 HTML 태그가 있음을 알 수 있다.</p>
+
+<p id="3" />
+
+<h2 id="4-마치며">4. 마치며</h2>
+<p><strong>웹브라우저의 구성요소들은 하나하나가 객체화</strong> 되어 있다. JavaScript를 통해 이 객체들을 제어함으로써 웹 브라우저를 제어할 수 있다. 이들 구성요소들은 <strong>계층적 관계</strong>로 이루어져 있으며, 가장 위에는 전역 객체인 Window 객체가 존재한다.</p>
+
+<p>Window 객체 아래에는 일반적으로 사용되는 BOM과 DOM 등이 있으며, <strong>BOM은 브라우저를, DOM은 문서를 동적으로 제어한다.</strong></p>
+
+<p id="4" />
+
+<h2 id="5-출처">5. 출처</h2>
+<ul>
+  <li><a href="https://ko.wikipedia.org/wiki/%EB%AC%B8%EC%84%9C_%EA%B0%9D%EC%B2%B4_%EB%AA%A8%EB%8D%B8">위키피디아, “문서 객체 모델”</a></li>
+  <li><a href="https://opentutorials.org/course/1375">생활코딩, “웹브라우저 자바스크립트”</a></li>
+  <li><a href="https://m.blog.naver.com/magnking/220972680805">Aldev, “[JavaScript] DOM이란 무엇인가?”</a></li>
+  <li><a href="https://developer.mozilla.org/ko/docs/DOM">MDN Web Docs, “문서 객체 모델(DOM)”</a></li>
+  <li><a href="https://developer.mozilla.org/ko/docs/Gecko_DOM_Reference/%EC%86%8C%EA%B0%9C">MDN Web Docs, “DOM 이란?”</a></li>
+</ul>
+:ET

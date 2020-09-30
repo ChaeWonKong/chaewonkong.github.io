@@ -1,0 +1,74 @@
+I"�<p><img src="https://github.com/ChaeWonKong/image-resource/blob/master/xcode1.png?raw=true" width="100%" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Environments</th>
+      <th style="text-align: center">버전</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">react-native</td>
+      <td style="text-align: center">0.60.4</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Xcode</td>
+      <td style="text-align: center">11.2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>최근 Xcode를 11.1에서 11.2로 업데이트 하면서 React Native의 ios debug 빌드가 아래와 같은 에러와 함께 실패하게 되었다.
+<code class="language-plaintext highlighter-rouge">react-native run-ios</code> 명령을 실행하면 아래 에러 메세지를 확인할 수 있었다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>info Found Xcode workspace <span class="s2">"Native_Makkcha.xcworkspace"</span>
+2019-11-12 11:55:22.239 simctl[12139:74526] CoreSimulator detected version change.  Framework version <span class="o">(</span>681.15<span class="o">)</span> does not match existing job version <span class="o">(</span>681.5.4<span class="o">)</span><span class="nb">.</span>  Attempting to remove the stale service <span class="k">in </span>order to add the expected version.
+error Could not parse the simulator list output. Run CLI with <span class="nt">--verbose</span> flag <span class="k">for </span>more details.
+SyntaxError: Unexpected token I <span class="k">in </span>JSON at position 0
+    at JSON.parse <span class="o">(</span>&lt;anonymous&gt;<span class="o">)</span>
+    at runOnSimulator <span class="o">(</span>/Users/leonkong/Desktop/dev/CodingHippo/Native_Makkcha/node_modules/@react-native-community/cli-platform-ios/build/commands/runIOS/index.js:128:23<span class="o">)</span>
+    at Object.runIOS <span class="o">[</span>as func] <span class="o">(</span>/Users/leonkong/Desktop/dev/CodingHippo/Native_Makkcha/node_modules/@react-native-community/cli-platform-ios/build/commands/runIOS/index.js:97:12<span class="o">)</span>
+    at Command.handleAction <span class="o">(</span>/Users/leonkong/Desktop/dev/CodingHippo/Native_Makkcha/node_modules/@react-native-community/cli/build/cliEntry.js:160:21<span class="o">)</span>
+    at Command.listener <span class="o">(</span>/Users/leonkong/Desktop/dev/CodingHippo/Native_Makkcha/node_modules/commander/index.js:315:8<span class="o">)</span>
+    at Command.emit <span class="o">(</span>events.js:198:13<span class="o">)</span>
+    at Command.parseArgs <span class="o">(</span>/Users/leonkong/Desktop/dev/CodingHippo/Native_Makkcha/node_modules/commander/index.js:651:12<span class="o">)</span>
+    at Command.parse <span class="o">(</span>/Users/leonkong/Desktop/dev/CodingHippo/Native_Makkcha/node_modules/commander/index.js:474:21<span class="o">)</span>
+    at setupAndRun <span class="o">(</span>/Users/leonkong/Desktop/dev/CodingHippo/Native_Makkcha/node_modules/@react-native-community/cli/build/cliEntry.js:210:24<span class="o">)</span>
+    at Object.run <span class="o">(</span>/Users/leonkong/Desktop/dev/CodingHippo/Native_Makkcha/node_modules/@react-native-community/cli/build/cliEntry.js:173:11<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="해결책">해결책</h2>
+<p>해결책은 매우 간단하다.
+일단 <strong>[프로젝트이름].xcworkspace 파일을 열기만 하면 된다. 나머지는 Xcode가 알아서 필요한 컴포넌트들을 설치하면서 저절로 해결된다.</strong></p>
+
+<p>Xcode를 한 번도 실행하지 않아서 생기는 에러라고 한다.</p>
+
+<h2 id="발생-가능한-에러">발생 가능한 에러</h2>
+<p>.xcworkspace 파일을 열기만 해도, <code class="language-plaintext highlighter-rouge">Could not parse the simulator list output</code> 에러는 바로 사라졌다.</p>
+
+<p>그러나, 새로운 에러가 발생했다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>info Found Xcode workspace <span class="s2">"Native_Makkcha.xcworkspace"</span>
+error Could not find <span class="s2">"iPhone X"</span> simulator. Run CLI with <span class="nt">--verbose</span> flag <span class="k">for </span>more details.
+</code></pre></div></div>
+
+<p>이 에러는 Xcode를 버전 11.1로 업데이트 할 때부터 발생했던 에러였다.
+에러의 발생 이유는 <strong>React Native의 타겟 빌드 디바이스 이름과 Xcode의 디바이스 이름이 서로 다르기 때문</strong>이다.</p>
+
+<p>자세한 내용은 이 포스트를 참고하자: <a href="https://chaewonkong.github.io/posts/xcode-iphonex-not-found.html">React Native - Could Not Find ‘iPhone X’ Error
+</a></p>
+
+<p>그래서 Xcode에 “iPhone X”를 수동으로 등록했다..</p>
+
+<p>자세한 내용은 아래 사진을 참고하자.</p>
+
+<p><img src="https://github.com/ChaeWonKong/image-resource/blob/master/xcode2.png?raw=true" width="100%" />
+왼쪽 아래에 있는 “+” 버튼을 클릭한 후 아래 사진처럼 “iPhone X”를 등록하면 된다.
+<img src="https://github.com/ChaeWonKong/image-resource/blob/master/xcode3.png?raw=true" width="100%" /></p>
+
+<h2 id="참고자료">참고자료</h2>
+<ul>
+  <li><a href="https://stackoverflow.com/questions/39810470/hello-world-program-for-react-native-throws-could-not-parse-the-simulator-lis">StackOverFlow, “Hello, World! program for React Native throws “Could not parse the simulator list output” on Mac”</a></li>
+</ul>
+:ET
