@@ -468,7 +468,7 @@ a.sidebar-nav-item:focus {
 .page,
 .post {
   margin-bottom: 4em;
-  line-height: 2;
+  line-height: 1.6;
 }
 
 /* Blog post or page title */
