@@ -1,0 +1,72 @@
+I"�<p><code class="language-plaintext highlighter-rouge">sitemap.xml</code> sometimes plays essential role, like SEO(Search Engine Optimization), and implementing Google Adsense.</p>
+
+<p>Let’s find out to create a valid sitemap.</p>
+
+<h2 id="basics">Basics</h2>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;urlset</span> <span class="na">xmlns=</span><span class="s">"http://www.sitemaps.org/schemas/sitemap/0.9"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;url&gt;</span>
+    <span class="nt">&lt;loc&gt;</span>https://rollingpaper.site/<span class="nt">&lt;/loc&gt;</span>
+  <span class="nt">&lt;/url&gt;</span>
+<span class="nt">&lt;/urlset&gt;</span>
+</code></pre></div></div>
+
+<p>These are the basic form of a sitemap.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">urlset</code> encapsulates the file.</li>
+  <li><code class="language-plaintext highlighter-rouge">url</code> is a parent tag for each URL entity.</li>
+  <li><code class="language-plaintext highlighter-rouge">loc</code> is the actual URL string.</li>
+</ul>
+
+<p>There are other tags like <code class="language-plaintext highlighter-rouge">lastmod</code>, <code class="language-plaintext highlighter-rouge">changefreq</code>…</p>
+<blockquote>
+  <p><a href="https://www.sitemaps.org/protocol.html">See sitemaps.org - ‘XML tag definitions’ section</a></p>
+</blockquote>
+
+<h2 id="beware">Beware</h2>
+<p>The URL string must be encoded properly.
+You can use JavaScript <code class="language-plaintext highlighter-rouge">encodeURI()</code> to handle this.</p>
+
+<p>Characters like <code class="language-plaintext highlighter-rouge">&amp;</code>, <code class="language-plaintext highlighter-rouge">'</code>, <code class="language-plaintext highlighter-rouge">"</code>, <code class="language-plaintext highlighter-rouge">&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;</code> must be properly escaped.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Character</th>
+      <th>Escape Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ampersand  &amp;</td>
+      <td>&amp;</td>
+    </tr>
+    <tr>
+      <td>Single Quote	‘</td>
+      <td>'</td>
+    </tr>
+    <tr>
+      <td>Double Quote	“</td>
+      <td>"</td>
+    </tr>
+    <tr>
+      <td>Greater Than	&gt;</td>
+      <td>&gt;</td>
+    </tr>
+    <tr>
+      <td>Less Than	&lt;</td>
+      <td>&lt;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The URL string must start with protocol(http, https).
+Depends on your web server, URL string must ends with a trailing slash(<code class="language-plaintext highlighter-rouge">/</code>).</p>
+
+<h2 id="referense">Referense</h2>
+<ul>
+  <li><a href="https://support.google.com/webmasters/answer/183668?hl=en">[Google] Build and submit a sitemap</a></li>
+  <li><a href="https://www.sitemaps.org/protocol.html">sitemap.org - protocol</a></li>
+</ul>
+:ET

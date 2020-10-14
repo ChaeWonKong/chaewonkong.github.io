@@ -17,20 +17,20 @@ excerpt: "JavaScript, Node.js, React, React native, Algorithm with Python"
 
 ## Technical Skills Summary
 
-- Languages: JavaScript(전문), TypeScript, Python, C++
-- Frontend(전문): React, React Native, Redux, Electron
-- Backend(보통): Node / Express.js, Serverless Framework, MongoDB, Socket.io
+- Languages: JavaScript(전문), TypeScript, Python
+- Frontend(전문): React, React Native, Electron
+- Backend(보통): Node.js, MySQL, MongoDB
 
 ## Projects
 ### 롤링페이퍼
 사용자들끼리 롤링페이퍼를 작성해 주고받을 수 있는 웹 SNS입니다.
-순 방문자(UV) 기준 50만 방문자를 달성했습니다.
+순 방문자(UV) 기준 **50만** 방문자를 달성했습니다.
 
 - [롤링페이퍼 LINK](https://rollingpaper.site)
 
 ### 막차
 쉽고 빠르게 막차를 검색할 수 있는 앱입니다. React Native로 개발되었습니다.
-iOS / Android 1만 다운로드 달성.
+iOS / Android **1만** 다운로드 달성.
 
 - [막차 - Apple App Store LINK](https://apps.apple.com/kr/app/막차/id1480522844)
 - [막차 - Google Play Store LINK](https://play.google.com/store/apps/details?id=com.native_makkcha)
@@ -51,5 +51,5 @@ iOS / Android 1만 다운로드 달성.
 
 ## Contact
 
-- email: chaewonkong@gmail.com
-- linkedin: https://www.linkedin.com/in/chaewon-kong-958986119/
+- [email: chaewonkong@gmail.com](mailto://chaewonkong@gmail.com)
+- [linked-in](https://www.linkedin.com/in/chaewon-kong-958986119/)
