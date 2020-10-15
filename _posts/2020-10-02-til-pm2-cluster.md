@@ -73,11 +73,11 @@ According to the [documentation](https://pm2.keymetrics.io/docs/usage/cluster-mo
 `reload` achieves 0-second-downtime reload whereas `restart` kills and restarts app which eventually creates downtime.
 
 ## Possible Bug
-![cpu-usage-0](https://raw.githubusercontent.com/ChaeWonKong/image-resource/master/pm2-1.png)
+![cpu-usage-0](https://raw.githubusercontent.com/ChaeWonKong/image-resource/master/pm2-1.png?raw=true)
 
 Generally `pm2 status` command offers CPU usage, yet in cluster mode, it returns '0%'.
 I made some search and found out that CPU usage computed by pm2 is not that accurate, since it only take first process in the computation([Ref: pm2 ls memory data is not accurate #3319](https://github.com/Unitech/pm2/issues/3319)).
 
-![log-not-available](https://raw.githubusercontent.com/ChaeWonKong/image-resource/master/pm2-2.png)
+![log-not-available](https://raw.githubusercontent.com/ChaeWonKong/image-resource/master/pm2-2.png?raw=true)
 Also, in cluster mode, `pm2 monit` does not generates npm logs.
 

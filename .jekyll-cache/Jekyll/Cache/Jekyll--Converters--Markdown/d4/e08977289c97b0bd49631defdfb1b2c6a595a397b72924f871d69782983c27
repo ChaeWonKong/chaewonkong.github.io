@@ -1,4 +1,4 @@
-I"�<p>Most modern server instances are composed of multi-core CPU.
+I"<p>Most modern server instances are composed of multi-core CPU.
 Since, Node.js runs application based on single-thread, Node.js provides API called <strong><a href="https://nodejs.org/api/cluster.html">Cluster</a></strong>.</p>
 
 <p>Simmilar, pm2, a process manager for Node.js, offers <strong><a href="https://pm2.keymetrics.io/docs/usage/cluster-mode/">Cluster Mode</a></strong>.
@@ -58,12 +58,12 @@ number to spread the app across number CPUs</p>
 <code class="language-plaintext highlighter-rouge">reload</code> achieves 0-second-downtime reload whereas <code class="language-plaintext highlighter-rouge">restart</code> kills and restarts app which eventually creates downtime.</p>
 
 <h2 id="possible-bug">Possible Bug</h2>
-<p><img src="https://raw.githubusercontent.com/ChaeWonKong/image-resource/master/pm2-1.png" alt="cpu-usage-0" /></p>
+<p><img src="https://raw.githubusercontent.com/ChaeWonKong/image-resource/master/pm2-1.png?raw=true" alt="cpu-usage-0" /></p>
 
 <p>Generally <code class="language-plaintext highlighter-rouge">pm2 status</code> command offers CPU usage, yet in cluster mode, it returns ‘0%’.
 I made some search and found out that CPU usage computed by pm2 is not that accurate, since it only take first process in the computation(<a href="https://github.com/Unitech/pm2/issues/3319">Ref: pm2 ls memory data is not accurate #3319</a>).</p>
 
-<p><img src="https://raw.githubusercontent.com/ChaeWonKong/image-resource/master/pm2-2.png" alt="log-not-available" />
+<p><img src="https://raw.githubusercontent.com/ChaeWonKong/image-resource/master/pm2-2.png?raw=true" alt="log-not-available" />
 Also, in cluster mode, <code class="language-plaintext highlighter-rouge">pm2 monit</code> does not generates npm logs.</p>
 
 :ET
