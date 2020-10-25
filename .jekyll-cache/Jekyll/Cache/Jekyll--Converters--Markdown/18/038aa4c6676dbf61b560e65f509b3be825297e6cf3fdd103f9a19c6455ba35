@@ -1,0 +1,2 @@
+I"�<p>기본적으로 React는 싱글 페이지 어플리케이션이죠. 보통 React Router를 이용해 라우팅을 합니다. 이 경우, S3와 CloudFront에 배포하였을 때, routing이 안 되는 문제가 발생할 수 있습니다. 오늘은 S3/CloudFront에서 React Router가 작동하도록 설정해봅니다. S3/CloudFront에 배포한 React 앱에서 Access Denied 에러를 해결합니다.</p>
+:ET
