@@ -1,0 +1,4 @@
+I"b<p>React에서 input 텍스트가 입력될 때, 텍스트의 길이만큼 점진적으로 width가 늘어나도록 구현해 봅니다.
+contenteditable 속성을 활용하며, 일반 input이나 textarea처럼 placeholder를 넘겨 사용합니다.
+contenteditable로 입력할 수 있는 최대 글자수를 제한하는 방법도 알아봅니다.</p>
+:ET

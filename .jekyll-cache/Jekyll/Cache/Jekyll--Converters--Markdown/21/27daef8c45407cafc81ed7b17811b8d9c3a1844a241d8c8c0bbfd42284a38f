@@ -1,0 +1,14 @@
+I"�<p>경우에 따라서 텍스트가 입력되는 만큼 텍스트필드의 넓이가 넓어지도록 구현해야할 수가 있습니다.
+바로 아래 사진 처럼 말이죠.</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/codechats.appspot.com/o/blog%2Fcontent-editable.gif?alt=media" alt="content-editable" /></p>
+
+<p>오늘은 <code class="language-plaintext highlighter-rouge">contenteditable</code> 속성을 이용해,</p>
+
+<ol>
+  <li>7글자까지만 입력 가능하고(maxLength),</li>
+  <li>작성하는 텍스트의 너비만큼 input 영역의 너비가 확장되는
+\n
+그런 컴포넌트를 구현해 보겠습니다.</li>
+</ol>
+:ET
