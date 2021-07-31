@@ -27,7 +27,7 @@ image: "https://images.unsplash.com/photo-1614018453562-77f6180ce036?ixlib=rb-1.
 
 CRA를 쓰면 프로젝트 생성은 간편하지만, eject를 하지 않고, 입맛에 맞게 사용하는 것이 쉽지 않다는 단점이 있다. 내가 원하는 스타일링 방법을 도입하기 위해서는 eject를 하던가 craco를 쓰던가 해야하는데, 이런것 모두가 간단한 프로젝트 앞에서는 다 비용이다.
 
-### Parcel 사용하기
+## Parcel 사용하기
 
 먼저 디렉토리를 생성해주자.
 
@@ -78,7 +78,7 @@ touch index.tsx
   "scripts": {
     "start": "parcel ./src/index.html",
     "build": "parcel ./src/index.html --no-sourcemaps"
-  },
+  }
 ```
 
 `build` 스크립트가 추가되어 있어야만 TypeScript로 작성한 모듈이나 컴포넌트가 정상적으로 작동한다.
@@ -134,13 +134,13 @@ Server running at http://localhost:1234
 
 라고 콘솔 창에 뜰 것이다. `localhost:1234` 로 이동해 App 컴포넌트가 제대로 마운트 되었는지, React가 정상적으로 동작하는지 확인한다.
 
-### styled-components
+## styled-components
 
 styled-components를 이용하면 CSS를 JS처럼 사용할 수 있다. 모듈을 만들고, 재사용하며, 변수를 주고받고 JS로 동적으로 변형할 수도 있다.
 
 less, sass 등 다양한 옵션도 있고, styled-components 특성상 성능 면에서 불리한 면도 있지만, 개발 편의성을 위해 사용하지 않을 이유가 없어 보인다.
 
-#### 설치
+### 설치
 
 ```shell
 npm i styled-components styled-reset
@@ -154,7 +154,7 @@ npm i -D babel-plugin-styled-components
 
 더불어 React DevTools가 있다면 `styled.button`이 아니라 `MyButton` 으로 보여지므로 디버깅이 훨씬 편리하다.
 
-#### GlobalStyles.ts
+### GlobalStyles.ts
 
 style을 reset 하고, 전역에서 설정되어야 할 부분들을 다루기 위해 `GlobalStyles.ts`를 두면 편리하다.
 
