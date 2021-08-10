@@ -25,14 +25,14 @@ excerpt: "JavaScript, Node.js, React, React native, Algorithm with Python"
 
 ## Projects
 
-### 롤링페이퍼
+### 롤링페이퍼 (2020~)
 
 사용자들끼리 롤링페이퍼를 작성해 주고받을 수 있는 웹 SNS입니다.
 순 방문자(UV) 기준 **473만** 방문자를 달성했습니다.
 
 - [롤링페이퍼 LINK](https://rollingpaper.site)
 
-### 막차
+### 막차 (2019)
 
 쉽고 빠르게 막차를 검색할 수 있는 앱입니다. React Native로 개발되었습니다.
 iOS / Android **1만** 다운로드 달성.
@@ -40,13 +40,13 @@ iOS / Android **1만** 다운로드 달성.
 - [막차 - Apple App Store LINK](https://apps.apple.com/kr/app/막차/id1480522844)
 - [막차 - Google Play Store LINK](https://play.google.com/store/apps/details?id=com.native_makkcha)
 
-### 하루시작
+### 하루시작 (2018)
 
 하루 하나의 주제를 던져주고 한 편의 시를 쓰게 하는 웹앱입니다.
 
 - [하루시작-하루 한편 시쓰기](https://harusijak.com)
 
-### 아두이노 드론 프로젝트
+### 아두이노 드론 프로젝트 (2016)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-yl7HBhhvFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
