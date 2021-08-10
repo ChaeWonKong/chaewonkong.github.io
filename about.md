@@ -46,6 +46,12 @@ iOS / Android **1만** 다운로드 달성.
 
 - [하루시작-하루 한편 시쓰기](https://harusijak.com)
 
+### 아두이노 드론 프로젝트
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-yl7HBhhvFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Arduino를 활용한 간단한 드론개발. Arduino 나노를 활용했으며, 오픈소스인 ArduPilot을 활용하고 매개변수를 조정해 비행해 성공.
+
 ## Language
 
 - 영어: 업무상 의사소통 가능(TOEIC 950, TOEIC SPEAKING Lv.7)
