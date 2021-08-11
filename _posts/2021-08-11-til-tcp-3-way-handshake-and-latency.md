@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[TIL]TCP 3-way Handshake와 네트워크 레이턴시(latency)"
+title: "[TIL] TCP 3-way Handshake와 네트워크 레이턴시(latency)"
 date: "2021-08-11"
 categories:
   - TIL
