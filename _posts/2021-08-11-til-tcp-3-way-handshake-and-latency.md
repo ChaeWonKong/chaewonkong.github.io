@@ -19,7 +19,7 @@ TCP는 속도보다는 신뢰성을 중요시하는 프로토콜이다. **빠르
 
 모든 TCP 연결은 3-way handshake를 통해 맺어진다. 클라이언트와 서버는 아래 그림과 같이 최초 1회 패킷 왕복이 있은 후, 비로소 데이터를 주고 받을 수 있게 된다. **즉 클라이언트에서 서버로 1회, 서버에서 다시 클라이언트로 1회 총 2회의 레이턴시를 겪게 되는 것이다.** 3-way handshake로 인해 낭비되는 왕복 레이턴시는 결코 작지 않다.
 
-<img src='https://github.com/ChaeWonKong/image-resource/blob/master/3-way-handshake.png?raw=true' width='600px' />
+<img src='https://github.com/ChaeWonKong/image-resource/blob/master/3-way-handshake.png?raw=true' width='420px' />
 
 만약 뉴욕에서 런던으로 네트워크 연결을 한다고 하면, 진공 상태에서는 신호 전달에 19ms가, 광섬유를 통한 신호전달에는 28ms가 소요된다. 이상적인 상태인 진공 상태에서 빛의 속도는 약 초속 30만 km이지만, 패킷은 진공상태가 아닌 광섬유 케이블이나 구리 케이블을 통해 전파된다. 이 중 가장 빠르게 신호(빛)를 전달할 수 있는 광섬유 케이블을 이용하더라도 빛의 속도보다는 느린 속도로만 패킷을 전달할 수 있다.
 
