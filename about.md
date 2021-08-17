@@ -65,7 +65,7 @@ iOS / Android **1만** 다운로드 달성.
 
 테크와 관련되지 않은 글쓰기를 위해 [브런치](https://brunch.co.kr/@chaewonkong)를 이용하고 있습니다.
 
-<iframe width='672' height='378' max-width='100%' src='https://brunch.co.kr/@chaewonkong'></iframe>
+<iframe width='375' height='500' max-width='100%' src='https://brunch.co.kr/@chaewonkong'></iframe>
 ## Contact
 
 - [email: chaewonkong@gmail.com](mailto://chaewonkong@gmail.com)
