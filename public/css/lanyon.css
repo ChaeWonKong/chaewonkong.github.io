@@ -736,7 +736,7 @@ a.pagination-item:hover {
   width: 672px;
   height: 378px;
 
-  @media (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     width: 327px;
     height: 184px;
   }
