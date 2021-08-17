@@ -730,3 +730,14 @@ a.pagination-item:hover {
 .anchor-list {
   color: black;
 }
+
+/* custom setting:::::: about, iframe */
+.iframe_youtube {
+  width: 672px;
+  height: 378px;
+
+  @media (max-width: 768px) {
+    width: 327px;
+    height: 184px;
+  }
+}
