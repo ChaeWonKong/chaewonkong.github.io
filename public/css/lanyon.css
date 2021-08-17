@@ -735,8 +735,10 @@ a.pagination-item:hover {
 .iframe_youtube {
   width: 672px;
   height: 378px;
+}
 
-  @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  .iframe_youtube {
     width: 327px;
     height: 184px;
   }
