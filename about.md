@@ -48,7 +48,7 @@ iOS / Android **1만** 다운로드 달성.
 
 ### 아두이노 드론 프로젝트 (2016)
 
-<iframe width="100%" height="auto" src="https://www.youtube.com/embed/-yl7HBhhvFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="672" height="378" max-width='100%' src="https://www.youtube.com/embed/-yl7HBhhvFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 - Arduino를 활용한 간단한 드론개발. Arduino 나노를 활용했으며, 오픈소스인 ArduPilot을 활용하고 매개변수를 조정해 비행해 성공.
 
@@ -65,7 +65,7 @@ iOS / Android **1만** 다운로드 달성.
 
 테크와 관련되지 않은 글쓰기를 위해 [브런치](https://brunch.co.kr/@chaewonkong)를 이용하고 있습니다.
 
-<iframe width='100%' height='30%' src='https://brunch.co.kr/@chaewonkong'></iframe>
+<iframe width='672' height='378' max-width='100%' src='https://brunch.co.kr/@chaewonkong'></iframe>
 ## Contact
 
 - [email: chaewonkong@gmail.com](mailto://chaewonkong@gmail.com)
