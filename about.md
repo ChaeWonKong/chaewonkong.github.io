@@ -49,7 +49,7 @@ iOS / Android **1만** 다운로드 달성.
 
 ### 아두이노 드론 프로젝트 (2016)
 
-<iframe class='iframe_youtube' width="672" height="378" src="https://www.youtube.com/embed/-yl7HBhhvFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class='iframe_youtube' src="https://www.youtube.com/embed/-yl7HBhhvFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 - Arduino를 활용한 간단한 드론개발. Arduino 나노를 활용했으며, 오픈소스인 ArduPilot을 활용하고 매개변수를 조정해 비행해 성공.
 
