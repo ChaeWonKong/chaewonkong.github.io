@@ -10,7 +10,8 @@ excerpt: "JavaScript, Node.js, React, React native, Algorithm with Python"
 
 ## 공채원 (Chaewon Kong)
 
-뭐든 만들 수 있는 개발자를 꿈꾸는 프론트엔드 엔지니어 입니다. 뚝딱뚝딱 만들고 사람들이 실제로 쓰는 모습을 보면서 행복을 느낍니다. JavaScript로 할 수 있는 모든 것을 해보자는 목표를 가지고 개발을 이어가고 있습니다. React를 활용한 웹 개발과 React Native를 활용한 모바일 앱 개발을 주로 하고 있습니다.
+개발 관점에서의 UX에 관심이 많습니다. TTI나 성능 개선을 위해 고민하고 연구합니다. 한편, 사업성을 충분히 고려해 개발하는 것에도 관심이 많습니다. 굳이 말하자면 기술적인 성취보다는 사업에 적합한 개발을 추구하는 것 같네요.
+React를 활용한 웹 개발과 React Native를 활용한 모바일 앱 개발을 주로 하고 있습니다.
 
 ## Career
 
