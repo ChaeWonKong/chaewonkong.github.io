@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[TIL] Mac - Unity 설치부터 VS Code를 이용한 개발환경 세팅까지
+title: "[TIL] Mac - Unity 설치부터 VS Code를 이용한 개발환경 세팅까지"
 date: "2021-08-19"
 categories:
   - TIL
