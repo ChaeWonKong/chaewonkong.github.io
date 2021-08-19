@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[TIL] # WebGL과 three.js 가볍게 알아보기"
-date: "2021-08-14"
+date: "2021-08-18"
 categories:
   - TIL
 excerpt: |
