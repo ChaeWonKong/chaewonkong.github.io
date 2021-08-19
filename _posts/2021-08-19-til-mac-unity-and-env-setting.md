@@ -9,8 +9,8 @@ excerpt: |
 feature_text: |
   ## Mac - Unity 설치부터 VS Code를 이용한 개발환경 세팅까지
   Mac에 Unity Hub를 이용해 Unity를 설치하고, Visual Studio Code를 이용해 개발하도록 환경 세팅을 진행해본다.
-feature_image: "https://images.unsplash.com/photo-1524351543168-8e38787614e9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80"
-image: "https://images.unsplash.com/photo-1524351543168-8e38787614e9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80"
+feature_image: "https://images.unsplash.com/photo-1531525645387-7f14be1bdbbd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80"
+image: "https://images.unsplash.com/photo-1531525645387-7f14be1bdbbd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80"
 ---
 
 Unity는 Unreal Engine과 함께 가장 흔히 사용되는 게임 엔진이다. 나는 Unity를 선택했는데, Unity는 모바일 게임 개발에서 보다 흔하게 사용되기 때문이다.
