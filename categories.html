@@ -9,27 +9,7 @@ title: Categories
     {% for category in site.categories %}
     <div class="category-box">
       <a href="{{ site.baseurl }}{{ category | first }}.html">
-        <span style="font-weight: 600">{{ category | first }}</p>
-
-        <!--
-  {% for posts in category %}
-  <div class="category-container">
-    {% for post in posts %} {% if post.title %}
-    <div class="category-box">
-      <a href="{{ site.baseurl }}{{ post.url }}">
-        <h3 class="category-headline">{{ post.title }}</h3>
-        
-        <p class="category-excerpt">
-          {{ post.excerpt | truncatewords: 30 }}
-        </p></a
-      >
-    </div>
-    {% endif %} {% endfor %}
-  </div>
-  {% endfor %}
--->
-
-        <!-- <hr /> -->
+        {{ category | first }}
       </a>
     </div>
     {% endfor %}

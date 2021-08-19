@@ -427,9 +427,8 @@ a.sidebar-nav-item:focus {
   /* word-wrap: break-word; */
   word-break: break-all;
 
-  & > a,
-  p,
-  span {
+  & > a {
+    font-weight: 600;
     margin: 0;
     text-decoration: none;
     color: #303030;
