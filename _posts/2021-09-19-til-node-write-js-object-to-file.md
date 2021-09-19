@@ -26,9 +26,9 @@ Node로 JavaScript 객체 File 작성하는 법을 배웠다.
 아래와 같은 예시가 있다고 하자.
 
 ```typescript
-interface ICat {
- name: string;
-  age: number
+interface ICats {
+  breed: string;
+  description: string;
 }
 
 const cats: ICat[] = [...] // 매우 긴 배열
