@@ -252,7 +252,7 @@ const MARKET_KEYS = ["KOSPI", "KOSDAQ"];
 
 `'NASDAQ'`는 없다고 잘 에러로 알려주고 있다.
 
-### 3. 서로 다른 2개의 param이 잘못된 타입으로 전달될 경우
+#### 3. 서로 다른 2개의 param이 잘못된 타입으로 전달될 경우
 
 만약 market도 잘못 오고, count도 잘못 온다면?
 `market=NASDAQ&count=abc`와 같이 query string을 짠다면 어떻게 될까?
