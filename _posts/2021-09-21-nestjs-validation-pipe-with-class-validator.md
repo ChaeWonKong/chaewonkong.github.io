@@ -15,9 +15,10 @@ image: "https://images.unsplash.com/photo-1516382799247-87df95d790b7?ixid=MnwxMj
 ---
 
 서버는 종종 클라이언트의 잘못된 요청에 대해서도 응답해야 하는 경우가 있다.
-이러한 예외처리를 정확히 해야만, 서버는 보다 견고하게 작동하게 된다.
+이러한 **예외처리를 정확히 해야만, 서버는 보다 견고하게 작동**하게 된다.
 
-NestJS는 잘못된 요청들을 쉽게 검증할 수 있는 툴들을 제공한다. 바로 `ValidationPipe` 다.
+NestJS는 잘못된 요청들을 쉽게 검증할 수 있는 툴들을 제공한다.
+바로 `ValidationPipe` 다.
 
 ```typescript
 // Controller
@@ -52,7 +53,7 @@ GET localhost:3000/abc
 ```
 
 잘 작동한다.
-하지만 굳이 찾자면 아직 불편한 점들이 있다.
+하지만 굳이 찾자면 아직 **불편한 점들**이 있다.
 
 1. 매번 request handler를 만들 때 validation 로직이 추가되어야 한다.
 2. request로 제공되는 param이 복잡한 구조일 경우, validation 로직도 복잡해져야 한다. 심지어 별도의 custom validation pipe가 필요할 수도 있다.
@@ -66,7 +67,7 @@ NestJS는 이런 문제를 해결할 수 있도록 `joi` 라는 라이브러리�
 
 [class-validator](https://github.com/typestack/class-validator)
 
-데코레이터와 데코레이터를 사용하지 않는 방식 모두로 validation을 할 수 있도록 지원하는 라이브러리다.
+**데코레이터와 데코레이터를 사용하지 않는 방식 모두로 validation을 할 수 있도록 지원하는 라이브러리**다.
 워낙 많은 validation 데코레이터를 지원하지만, 몇가지만 소개하자면 다음과 같다.
 
 `@IsEmpty()`, `@IsIn(values: any[])`, `@IsNumber(options: IsNumberOptions)`, `@IsEnum(entity: object)`, `@IsDateString()`, `@IsNumberString(options?: IsNumericOptions)`, `@IsCurrency(options?: IsCurrencyOptions)`, `@IsHexColor()`, `@IsISIN()`...
@@ -212,7 +213,7 @@ DTO에서만 설정해 주면 나머지는 알아서 프레임워크가 다 한�
 
 ### validation 테스트
 
-자, 이제 잘못된 값을 요청하면 어떤 결과가 돌아오는지 테스트 해보자.
+자, 이제 **잘못된 값을 요청하면 어떤 결과가 돌아오는지** 테스트 해보자.
 
 #### 1. count에 'abc'를 넣은 경우
 
@@ -272,7 +273,7 @@ const MARKET_KEYS = ["KOSPI", "KOSDAQ"];
 
 ## 결론
 
-NestJS에서 `class-validator`를 사용하는 방법을 알아보았다. 전역 스코프로 한 차례만 모듈을 등록하고, main에 설정해 두면 이후에는 간단하게 DTO를 작성하면서 데코레이터 기반으로 타입을 강제할 수 있어 편리하다.
+NestJS에서 `class-validator`를 사용하는 방법을 알아보았다. **전역 스코프로 한 차례만 모듈을 등록하고, main에 설정해 두면 이후에는 간단하게 DTO를 작성하면서 데코레이터 기반으로 타입을 강제할 수 있어 편리**하다.
 
 NestJS를 며칠째 사용해 보고 있는데, 생각보다 강력하다. Node의 단점이라고 생각했던 많은 부분들이 NestJS를 사용하면서 해소되는 느낌이다. 마치 개비스콘 짤이 생각난다.
 <img width='100%' src='http://health.chosun.com/site/data/img_dir/2018/04/12/2018041202376_0.jpg'>
