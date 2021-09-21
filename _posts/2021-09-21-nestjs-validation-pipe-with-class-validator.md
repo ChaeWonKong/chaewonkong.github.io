@@ -18,6 +18,7 @@ image: "https://images.unsplash.com/photo-1516382799247-87df95d790b7?ixid=MnwxMj
 이러한 **예외처리를 정확히 해야만, 서버는 보다 견고하게 작동**하게 된다.
 
 NestJS는 잘못된 요청들을 쉽게 검증할 수 있는 툴들을 제공한다.
+
 바로 `ValidationPipe` 다.
 
 ```typescript
@@ -30,7 +31,7 @@ async findOne(@Param('id', ParseIntPipe) id: number) {
 }
 ```
 
-> 출처: <<https://docs.nestjs.com/pipes>
+> 출처: [https://docs.nestjs.com/pipes](https://docs.nestjs.com/pipes)
 
 이렇게 각각의 route handler에 validation 로직을 넣을 수도 있다.
 이것만으로도 이미 너무 편리하다.
