@@ -71,7 +71,7 @@ NestJS는 이런 문제를 해결할 수 있도록 `joi` 라는 라이브러리�
 
 `@IsEmpty()`, `@IsIn(values: any[])`, `@IsNumber(options: IsNumberOptions)`, `@IsEnum(entity: object)`, `@IsDateString()`, `@IsNumberString(options?: IsNumericOptions)`, `@IsCurrency(options?: IsCurrencyOptions)`, `@IsHexColor()`, `@IsISIN()`...
 
-<iframe width='100%' height='200px' src='https://github.com/typestack/class-validator/blob/develop/README.md#validation-decorators'></iframe>
+> [지원하는 Validation 데코레이터 전체 보기](https://github.com/typestack/class-validator/blob/develop/README.md#validation-decorators)
 
 웬만한 것들은 다 지원한다고 보면 된다. 심지어 커스텀 validator도 만들어 쓸 수 있다.
 
