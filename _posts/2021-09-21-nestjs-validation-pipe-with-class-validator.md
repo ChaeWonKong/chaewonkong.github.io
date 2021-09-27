@@ -83,7 +83,15 @@ NestJS와도 나름 찰떡궁합이어서 이것을 써 보기로 했다. NestJS
 
 이제 본격적으로 NestJS에 `class-validator` 를 적용해 보자. 매번 controller에 적용하기 보다는, 전역 설정으로 등록해 사용하는 쪽으로 알아본다.
 
-### 1. 전역(global) 설정으로 ValidationPipe 추가
+### 1. class-validator 설치
+
+아래 2개 라이브러리를 설치해 준다.
+
+```shell
+npm i --save class-validator class-transformer
+```
+
+### 2. 전역(global) 설정으로 ValidationPipe 추가
 
 전역 스코프에서 validation pipe가 동작하도록 하려면, `useGlobalPipes` 라는 메서드를 이용해 `ValidationPipe` 를 `bootstrap()` 함수에 설정해 주어야 한다.
 
@@ -114,7 +122,7 @@ async function bootstrap() {
 bootstrap();
 ```
 
-### 2. module에 ValidationPipe 추가
+### 3. module에 ValidationPipe 추가
 
 다음으로 module에 `ValidationPipe` 를 추가해 준다.
 왜 이 작업을 해야 하는지에 대해서는 NestJS에서 친절히 설명을 해주고 있다.
@@ -165,7 +173,7 @@ import { APP_PIPE } from "@nestjs/core";
 export class AppModule {}
 ```
 
-### 3. DTO에 class-validator 추가해 validation 구현
+### 4. DTO에 class-validator 추가해 validation 구현
 
 이제 설정(configuration)은 끝났다. 사용만 하면 된다.
 어떻게 사용하냐고?
