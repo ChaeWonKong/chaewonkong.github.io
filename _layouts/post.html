@@ -8,8 +8,8 @@ layout: default
   <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
-  {{ content | split:"<h2>" | first}}
-{% assign content_array = content | split: '<h2>' %}
+  <!-- {{ content | split:"<h2>" | first}} -->
+{% assign content_array = content | split: '---' %}
 {% for block in content_array %}
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
