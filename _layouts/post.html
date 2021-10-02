@@ -9,7 +9,7 @@ layout: default
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
   {{ content | split:"<h2>" | first}}
-{% assign content_array = content | split: '##' %}
+{% assign content_array = content | split: '<h2>' %}
 {% for block in content_array %}
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
@@ -17,7 +17,7 @@ layout: default
      data-ad-format="fluid"
      data-ad-client="ca-pub-5994805958712144"
      data-ad-slot="1203355822"></ins>
-  {{ '##' | append: block }}
+  {{ '<h2>' | append: block }}
   {% endif %}
 {% endfor %}
 <!-- 
