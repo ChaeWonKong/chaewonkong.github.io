@@ -9,7 +9,7 @@ layout: default
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
   <!-- {{ content | split:"<h2>" | first}} -->
-  {% assign content_array = content | split: '---' %} {% for block in
+  {% assign content_array = content | split: '-ads-' %} {% for block in
   content_array %}
   <ins
     class="adsbygoogle"

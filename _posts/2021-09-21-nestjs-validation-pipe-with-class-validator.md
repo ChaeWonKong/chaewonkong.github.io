@@ -64,7 +64,7 @@ NestJS는 이런 문제를 해결할 수 있도록 `joi` 라는 라이브러리�
 
 오늘은 `class-validator` 를 이용해, 편하고 강력하게 validation을 할 수 있는 방법을 알아보고자 한다.
 
----
+-ads-
 
 ## class-validator
 
@@ -222,7 +222,7 @@ DTO에서만 설정해 주면 나머지는 알아서 프레임워크가 다 한�
 서버는 Query Param을 destructuring해 `const { market, minutes, count } = query;`와 같이 필요한 param을 발라낸다.
 이어서 service 단에서 제3의 API로 market, minutes, count를 포함한 요청을 보내고 응답값을 클라이언트에게 응답으로 제공한다.
 
----
+-ads-
 
 ### validation 테스트
 
