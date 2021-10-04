@@ -3,9 +3,10 @@ layout: post
 title: "6 Steps to Use Git Rebase in Your Projects"
 date: "2021-10-04"
 categories:
-- GIT
+  - GIT
 excerpt: |
-Use git rebase change your base commits. Programmatically(CLI) learn how to rebase. Using rebase, collaboration with other developer will be much easier and simpler than before.
+  Use git rebase change your base commits. Programmatically(CLI) learn how to rebase. Using rebase, collaboration with other developer will be much easier and simpler than before.
+
 feature_text: |
   ## 6 Steps to Use Git Rebase in Your Projects
   Use git rebase change your base commits. Programmatically(CLI) learn how to rebase. Using rebase, collaboration with other developer will be much easier and simpler than before.
