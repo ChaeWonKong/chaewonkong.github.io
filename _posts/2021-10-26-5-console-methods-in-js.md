@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "5 console methods that makes your JavaScript debbuging life easier"
+title: "5 Console Methods That Makes Your JavaScript Debbuging Life Easier"
 date: "2021-10-26"
 categories:
   - JavaScript
