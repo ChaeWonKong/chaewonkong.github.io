@@ -16,6 +16,8 @@ image: "https://images.unsplash.com/photo-1543966888-7c1dc482a810?ixlib=rb-1.2.1
 
 [문제링크: https://programmers.co.kr/learn/courses/30/lessons/64065](https://programmers.co.kr/learn/courses/30/lessons/64065)
 
+{% raw %}
+
 ## [문제내용]
 
 셀수있는 수량의 순서있는 열거 또는 어떤 순서를 따르는 요소들의 모음을 튜플(tuple)이라고 합니다. n개의 요소를 가진 튜플을 n-튜플(n-tuple)이라고 하며, 다음과 같이 표현할 수 있습니다.
@@ -183,3 +185,5 @@ public class Tuple {
     }
 }
 ```
+
+{% endraw %}
