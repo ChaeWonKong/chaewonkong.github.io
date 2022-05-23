@@ -13,6 +13,8 @@ feature_image: "https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?ixl
 image: "https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=933&q=80"
 ---
 
+## [TIL] Node로 JavaScript 객체 File 작성하는 법
+
 Node로 JavaScript 객체 File 작성하는 법을 배웠다.
 
 `fs.writeFile` 과 `util.inspect` 를 적절히 사용하면 가능하다.
