@@ -6,7 +6,6 @@ categories:
   - NestJS
 excerpt: |
   Nest.js에서 in-memory cache 사용하기
-
 feature_text: |
   ## Nest.js에서 in-memory cache 사용하기
   Nest.js에서 in-memory cache 사용하기

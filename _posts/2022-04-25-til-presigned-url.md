@@ -6,7 +6,6 @@ categories:
   - TIL
 excerpt: |
   AWS S3 presigned URL을 위한 이미지 업로드
-
 feature_text: |
   ##  AWS S3 presigned URL을 위한 이미지 업로드
   서버에서 파일을 처리할 필요 없이, 클라이언트에서 바로 S3로 파일을 업로드하는 방법 (multer 필요 X)

@@ -6,7 +6,6 @@ categories:
   - Algorithm
 excerpt: |
   문자열 파싱, 커스텀 comparator
-
 feature_text: |
   ## [Java] 2019 카카오 겨울 인턴쉽 코딩테스트 - 튜플
   문자열 파싱, 커스텀 comparator

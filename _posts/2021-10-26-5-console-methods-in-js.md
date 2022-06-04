@@ -6,7 +6,6 @@ categories:
   - JavaScript
 excerpt: |
   There are other useful console methods that will make your debugging life easier than console.log. Let's learn about console.log with styling, console.table, console.trace, console.count, and console.time
-
 feature_text: |
   ## 5 console methods that makes your JavaScript debbuging life easier
   There are other useful console methods that will make your debugging life easier than console.log. Let's learn about console.log with styling, console.table, console.trace, console.count, and console.time

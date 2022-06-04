@@ -6,7 +6,6 @@ categories:
   - NestJS
 excerpt: |
   서버에서 요청을 처리할 때, 종종 클라이언트가 잘못된 request body나 query param을 넘기는 경우가 있다. NestJS에서는 ValidationPipe를 이용해 이런 오류 케이스를 우아하게 핸들할 수 있다. class-validator를 이용하면 단 몇 줄의 추가적인 코드 만으로도 쉽고 간단하게 잘못된 요청에 대응할 수 있다.
-
 feature_text: |
   ## class-validator를 이용해 전역적(globally)으로 validation pipe 적용하기
   NestJS에서 validation pipe를 global하게 사용하는 법을 알아본다. class-validator를 이용해 더 쉽고 간단하게 요청의 타입을 검증(validation)해본다. 서버에서 요청을 처리할 때, 종종 클라이언트가 잘못된 request body나 query param을 넘기는 경우가 있다. NestJS에서는 ValidationPipe를 이용해 이런 오류 케이스를 우아하게 핸들할 수 있다. class-validator를 이용하면 단 몇 줄의 추가적인 코드 만으로도 쉽고 간단하게 잘못된 요청에 대응할 수 있다.
