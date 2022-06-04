@@ -67,11 +67,12 @@ $ autocannon -c 100 http://localhost/review?productId=1
 ### 캐싱을 하지 않은 경우
 
 ![no cache result](https://leonkong.cc/public/no_cache.png)
-| 항목 | 결과 |
-| :---: | :---: |
+
+|     항목     |   결과    |
+| :----------: | :-------: |
 | Avg. Latency | 170.76 ms |
-| Avg. Req/Sec | 578.71 |
-| total Req | 6K |
+| Avg. Req/Sec |  578.71   |
+|  total Req   |    6K     |
 
 ### 캐싱 적용을 한 경우
 
