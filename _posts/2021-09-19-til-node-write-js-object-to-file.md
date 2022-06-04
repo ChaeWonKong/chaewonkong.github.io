@@ -5,7 +5,7 @@ date: "2021-09-19"
 categories:
   - TIL
 excerpt: |
-Node로 JavaScript 객체 File 작성하는 법을 배웠다.
+  Node로 JavaScript 객체 File 작성하는 법을 배웠다.
 feature_text: |
   ## Node로 JavaScript 객체 File 작성하는 법
   Node로 JavaScript 객체 File 작성하는 법을 배웠다.
