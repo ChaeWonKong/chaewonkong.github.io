@@ -3,7 +3,7 @@ layout: post
 title: "Nest.js에서 in-memory cache 사용하기"
 date: "2022-06-04"
 categories:
-  - Algorithm
+  - NestJS
 excerpt: |
   Nest.js에서 in-memory cache 사용하기
 

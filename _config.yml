@@ -19,7 +19,7 @@ plugins:
 title: Leon
 tagline: "Chaewon Kong's dev blog"
 description: "Chaewon Kong's Dev Blog on web development and computer science. Frequently writes on JavaScript, React, React Native and Node."
-url: http://chaewonkong.github.io
+url: http://leonkong.cc
 baseurl: ""
 paginate: 1
 
