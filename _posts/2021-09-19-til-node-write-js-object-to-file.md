@@ -3,7 +3,7 @@ layout: post
 title: "[TIL] Node로 JavaScript 객체 File 작성하는 법"
 date: "2021-09-19"
 categories:
-- TIL
+  - TIL
 excerpt: |
 Node로 JavaScript 객체 File 작성하는 법을 배웠다.
 feature_text: |
